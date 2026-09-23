@@ -26,7 +26,6 @@
     <div class="header-container">
       <a href="#" class="brand-logo" aria-label="SAMPLE Restaurant Home">
         <span class="logo-text">SAMPLE</span>
-        <span class="logo-sub">CRAFT BURGERS &bull; USA</span>
       </a>
 
       <nav class="nav-desktop" aria-label="Primary Navigation">
@@ -156,23 +155,46 @@
       </div>
     </section>
 
-    <!-- THE BURGER LAB (INTERACTIVE BUILDER - CLEAN & UNCLUTTERED) -->
+    <!-- THE BURGER LAB (INTERACTIVE BUILDER - PROFESSIONAL & ENTERTAINING) -->
     <section class="lab-section" id="lab">
       <div class="section-container">
         <div class="lab-layout">
           <!-- Interactive Visualizer -->
           <div class="lab-visualizer-col">
             <div class="lab-card-header">
+              <span class="lab-eyebrow">Interactive Atelier</span>
               <h2 class="lab-title">The Burger Lab</h2>
               <p class="lab-desc">Engineered to order. Watch your burger build layer-by-layer as you tailor meats, cheeses, and glazes.</p>
             </div>
 
-            <!-- Dynamic Live Burger Stack Graphic -->
+            <!-- Dynamic Live Burger Stack Graphic with HUD -->
             <div class="interactive-stack-container" id="stackContainer">
+              <!-- Live Culinary HUD -->
+              <div class="lab-hud" aria-label="Nutritional and Flavor Telemetry">
+                <div class="hud-item">
+                  <span class="hud-label">Calories</span>
+                  <strong class="hud-val" id="hudCalories">890 kcal</strong>
+                </div>
+                <div class="hud-item">
+                  <span class="hud-label">Heat Index</span>
+                  <strong class="hud-val" id="hudHeat">Mild</strong>
+                </div>
+                <div class="hud-item">
+                  <span class="hud-label">Prime Cut</span>
+                  <strong class="hud-val" id="hudProfile">Heritage Angus</strong>
+                </div>
+              </div>
+
+              <!-- Animated Stack Canvas -->
               <div class="stack-canvas" id="stackCanvas" aria-live="polite">
-                <!-- Stack layers are dynamically rendered here -->
+                <!-- Stack layers are dynamically rendered with realistic culinary shapes via JS -->
               </div>
               <div class="stack-pedestal"></div>
+
+              <!-- Active Layer Live Inspector -->
+              <div class="stack-footer-bar">
+                <span class="stack-layer-indicator" id="stackStatus">6 Artisan Layers Assembled</span>
+              </div>
             </div>
           </div>
 
@@ -181,8 +203,8 @@
             <div class="lab-controls-panel">
               <div class="controls-header">
                 <div>
-                  <h3 class="panel-heading">Customize Creation</h3>
-                  <p class="panel-sub">Tap to select ingredients</p>
+                  <h3 class="panel-heading">Curate Your Creation</h3>
+                  <p class="panel-sub">Tap ingredients to adjust flavor &amp; cut</p>
                 </div>
                 <div class="lab-price-box">
                   <span class="lab-total-price" id="labPrice">$16.50</span>
@@ -191,89 +213,122 @@
 
               <!-- Bun Selector -->
               <div class="control-group">
-                <label class="group-label">Artisanal Bun</label>
+                <div class="group-header-flex">
+                  <label class="group-label">1. Artisanal Bun</label>
+                  <span class="group-selected-badge" id="selectedBunLabel">Golden Brioche</span>
+                </div>
                 <div class="option-grid" id="bunOptions">
-                  <button class="chip-option active" data-type="bun" data-id="brioche" data-price="0">
+                  <button class="chip-option active" data-type="bun" data-id="brioche" data-price="0" data-cal="210">
                     <span class="chip-name">Golden Brioche</span>
+                    <span class="chip-meta">Included &bull; 210 cal</span>
                   </button>
-                  <button class="chip-option" data-type="bun" data-id="pretzel" data-price="1.50">
-                    <span class="chip-name">Pretzel Bun (+$1.50)</span>
+                  <button class="chip-option" data-type="bun" data-id="pretzel" data-price="1.50" data-cal="260">
+                    <span class="chip-name">Pretzel Bun</span>
+                    <span class="chip-meta">+$1.50 &bull; 260 cal</span>
                   </button>
-                  <button class="chip-option" data-type="bun" data-id="lettuce" data-price="0">
+                  <button class="chip-option" data-type="bun" data-id="lettuce" data-price="0" data-cal="30">
                     <span class="chip-name">Lettuce Wrap</span>
+                    <span class="chip-meta">Included &bull; 30 cal</span>
                   </button>
                 </div>
               </div>
 
               <!-- Patty Selection -->
               <div class="control-group">
-                <label class="group-label">Prime Patty</label>
+                <div class="group-header-flex">
+                  <label class="group-label">2. Prime Patty</label>
+                  <span class="group-selected-badge" id="selectedPattyLabel">Double Angus Smash</span>
+                </div>
                 <div class="option-grid" id="pattyOptions">
-                  <button class="chip-option active" data-type="patty" data-id="angus-double" data-price="9.00">
-                    <span class="chip-name">Double Dry-Aged Angus</span>
+                  <button class="chip-option active" data-type="patty" data-id="angus-double" data-price="9.00" data-cal="440">
+                    <span class="chip-name">Double Angus Smash</span>
+                    <span class="chip-meta">$9.00 &bull; 440 cal</span>
                   </button>
-                  <button class="chip-option" data-type="patty" data-id="wagyu-single" data-price="12.00">
-                    <span class="chip-name">American Wagyu Cut (+$3)</span>
+                  <button class="chip-option" data-type="patty" data-id="wagyu-single" data-price="12.00" data-cal="510">
+                    <span class="chip-name">American Wagyu</span>
+                    <span class="chip-meta">+$3.00 &bull; 510 cal</span>
                   </button>
-                  <button class="chip-option" data-type="patty" data-id="portobello" data-price="8.00">
-                    <span class="chip-name">Wood-Fired Portobello</span>
+                  <button class="chip-option" data-type="patty" data-id="portobello" data-price="8.00" data-cal="190">
+                    <span class="chip-name">Wood Portobello</span>
+                    <span class="chip-meta">$8.00 &bull; 190 cal</span>
                   </button>
                 </div>
               </div>
 
               <!-- Melted Cheese Selection -->
               <div class="control-group">
-                <label class="group-label">Melted Cheese</label>
+                <div class="group-header-flex">
+                  <label class="group-label">3. Melted Cheese</label>
+                  <span class="group-selected-badge" id="selectedCheeseLabel">Vermont Cheddar</span>
+                </div>
                 <div class="option-grid" id="cheeseOptions">
-                  <button class="chip-option active" data-type="cheese" data-id="cheddar" data-price="2.00">
+                  <button class="chip-option active" data-type="cheese" data-id="cheddar" data-price="2.00" data-cal="110">
                     <span class="chip-name">Vermont Cheddar</span>
+                    <span class="chip-meta">+$2.00 &bull; 110 cal</span>
                   </button>
-                  <button class="chip-option" data-type="cheese" data-id="gouda" data-price="2.50">
+                  <button class="chip-option" data-type="cheese" data-id="gouda" data-price="2.50" data-cal="130">
                     <span class="chip-name">Smoked Gouda</span>
+                    <span class="chip-meta">+$2.50 &bull; 130 cal</span>
                   </button>
-                  <button class="chip-option" data-type="cheese" data-id="blue" data-price="2.50">
-                    <span class="chip-name">Blue Cheese</span>
+                  <button class="chip-option" data-type="cheese" data-id="blue" data-price="2.50" data-cal="120">
+                    <span class="chip-name">Aged Blue</span>
+                    <span class="chip-meta">+$2.50 &bull; 120 cal</span>
                   </button>
                 </div>
               </div>
 
               <!-- Toppings & Additions (Multi-select) -->
               <div class="control-group">
-                <label class="group-label">Additions</label>
+                <div class="group-header-flex">
+                  <label class="group-label">4. Additions (Multi-select)</label>
+                  <span class="group-selected-badge" id="selectedToppingsLabel">2 Selected</span>
+                </div>
                 <div class="toggle-grid" id="toppingOptions">
-                  <button class="chip-toggle active" data-id="bacon" data-price="2.50">
-                    <span>Thick-Cut Maple Bacon</span>
+                  <button class="chip-toggle active" data-id="bacon" data-price="2.50" data-cal="120">
+                    <span class="chip-toggle-title">Thick Maple Bacon</span>
+                    <span class="chip-meta">+$2.50 &bull; 120 cal</span>
                   </button>
-                  <button class="chip-toggle active" data-id="onions" data-price="1.00">
-                    <span>Bourbon Onions</span>
+                  <button class="chip-toggle active" data-id="onions" data-price="1.00" data-cal="45">
+                    <span class="chip-toggle-title">Bourbon Onions</span>
+                    <span class="chip-meta">+$1.00 &bull; 45 cal</span>
                   </button>
-                  <button class="chip-toggle" data-id="crispy-shallots" data-price="1.25">
-                    <span>Crispy Shallots</span>
+                  <button class="chip-toggle" data-id="crispy-shallots" data-price="1.25" data-cal="55">
+                    <span class="chip-toggle-title">Crispy Shallots</span>
+                    <span class="chip-meta">+$1.25 &bull; 55 cal</span>
                   </button>
-                  <button class="chip-toggle" data-id="pickles" data-price="0.50">
-                    <span>House Pickles</span>
+                  <button class="chip-toggle" data-id="pickles" data-price="0.50" data-cal="15">
+                    <span class="chip-toggle-title">House Pickles</span>
+                    <span class="chip-meta">+$0.50 &bull; 15 cal</span>
                   </button>
-                  <button class="chip-toggle" data-id="jalapenos" data-price="0.75">
-                    <span>Torched Jalapeños</span>
+                  <button class="chip-toggle" data-id="jalapenos" data-price="0.75" data-cal="10" data-heat="20">
+                    <span class="chip-toggle-title">Torched Jalapeños</span>
+                    <span class="chip-meta">+$0.75 &bull; 10 cal</span>
                   </button>
-                  <button class="chip-toggle" data-id="arugula" data-price="0.50">
-                    <span>Baby Arugula</span>
+                  <button class="chip-toggle" data-id="arugula" data-price="0.50" data-cal="10">
+                    <span class="chip-toggle-title">Baby Arugula</span>
+                    <span class="chip-meta">+$0.50 &bull; 10 cal</span>
                   </button>
                 </div>
               </div>
 
               <!-- Signature Sauces -->
               <div class="control-group">
-                <label class="group-label">House Sauce</label>
+                <div class="group-header-flex">
+                  <label class="group-label">5. House Sauce</label>
+                  <span class="group-selected-badge" id="selectedSauceLabel">Heritage Aioli</span>
+                </div>
                 <div class="option-grid" id="sauceOptions">
-                  <button class="chip-option active" data-type="sauce" data-id="sample-sauce" data-price="1.00">
+                  <button class="chip-option active" data-type="sauce" data-id="sample-sauce" data-price="1.00" data-cal="85">
                     <span class="chip-name">Heritage Aioli</span>
+                    <span class="chip-meta">+$1.00 &bull; 85 cal</span>
                   </button>
-                  <button class="chip-option" data-type="sauce" data-id="black-truffle" data-price="2.50">
+                  <button class="chip-option" data-type="sauce" data-id="black-truffle" data-price="2.50" data-cal="95">
                     <span class="chip-name">Truffle Emulsion</span>
+                    <span class="chip-meta">+$2.50 &bull; 95 cal</span>
                   </button>
-                  <button class="chip-option" data-type="sauce" data-id="ghost-fire" data-price="1.25">
+                  <button class="chip-option" data-type="sauce" data-id="ghost-fire" data-price="1.25" data-cal="60" data-heat="60">
                     <span class="chip-name">Ghost Honey</span>
+                    <span class="chip-meta">+$1.25 &bull; 60 cal</span>
                   </button>
                 </div>
               </div>
@@ -283,6 +338,9 @@
                 <button class="btn btn-primary w-full btn-large" id="addLabBurgerBtn">
                   <span>Add Custom Burger to Bag</span>
                   <span class="btn-price-tag" id="labBtnPrice">$16.50</span>
+                </button>
+                <button class="btn-lab-reset" id="resetLabBtn" type="button" aria-label="Reset burger customization">
+                  <span>Reset to Classic Build</span>
                 </button>
               </div>
             </div>

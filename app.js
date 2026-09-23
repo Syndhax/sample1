@@ -493,9 +493,9 @@ function initBurgerLab() {
       btn.classList.add("active");
       State.lab.bun = {
         id: btn.dataset.id,
-        name: btn.querySelector(".chip-name").textContent,
+        name: btn.querySelector(".chip-name").textContent.trim(),
         price: parseFloat(btn.dataset.price),
-        cal: parseInt(btn.dataset.cal)
+        cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
     });
@@ -508,9 +508,9 @@ function initBurgerLab() {
       btn.classList.add("active");
       State.lab.patty = {
         id: btn.dataset.id,
-        name: btn.querySelector(".chip-name").textContent,
+        name: btn.querySelector(".chip-name").textContent.trim(),
         price: parseFloat(btn.dataset.price),
-        cal: parseInt(btn.dataset.cal)
+        cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
     });
@@ -523,9 +523,9 @@ function initBurgerLab() {
       btn.classList.add("active");
       State.lab.cheese = {
         id: btn.dataset.id,
-        name: btn.querySelector(".chip-name").textContent,
+        name: btn.querySelector(".chip-name").textContent.trim(),
         price: parseFloat(btn.dataset.price),
-        cal: parseInt(btn.dataset.cal)
+        cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
     });
@@ -536,14 +536,17 @@ function initBurgerLab() {
     btn.addEventListener("click", () => {
       const active = btn.classList.toggle("active");
       const id = btn.dataset.id;
+      const title = btn.querySelector(".chip-toggle-title") 
+        ? btn.querySelector(".chip-toggle-title").textContent.trim() 
+        : btn.querySelector("span").textContent.trim();
       if (active) {
         State.lab.toppings.push({
           id: id,
-          name: btn.querySelector("span:first-child").textContent,
+          name: title,
           price: parseFloat(btn.dataset.price),
-          cal: parseInt(btn.dataset.cal),
-          heat: parseInt(btn.dataset.heat || 0),
-          crunch: parseInt(btn.dataset.crunch || 10)
+          cal: parseInt(btn.dataset.cal, 10),
+          heat: parseInt(btn.dataset.heat || 0, 10),
+          crunch: parseInt(btn.dataset.crunch || 10, 10)
         });
       } else {
         State.lab.toppings = State.lab.toppings.filter(t => t.id !== id);
@@ -559,14 +562,20 @@ function initBurgerLab() {
       btn.classList.add("active");
       State.lab.sauce = {
         id: btn.dataset.id,
-        name: btn.querySelector(".chip-name").textContent,
+        name: btn.querySelector(".chip-name").textContent.trim(),
         price: parseFloat(btn.dataset.price),
-        cal: parseInt(btn.dataset.cal),
-        heat: btn.dataset.id === "ghost-fire" ? 60 : 0
+        cal: parseInt(btn.dataset.cal, 10),
+        heat: parseInt(btn.dataset.heat || 0, 10)
       };
       updateLab();
     });
   });
+
+  // Reset button
+  const resetBtn = document.getElementById("resetLabBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetBurgerLab);
+  }
 
   // Add Lab burger to bag
   const addLabBtn = document.getElementById("addLabBurgerBtn");
@@ -578,6 +587,29 @@ function initBurgerLab() {
   updateLab();
 }
 
+function resetBurgerLab() {
+  State.lab.bun = { id: "brioche", name: "Golden Brioche", price: 0, cal: 210 };
+  State.lab.patty = { id: "angus-double", name: "Double Angus Smash", price: 9.00, cal: 440 };
+  State.lab.cheese = { id: "cheddar", name: "Vermont Cheddar", price: 2.00, cal: 110 };
+  State.lab.toppings = [
+    { id: "bacon", name: "Thick Maple Bacon", price: 2.50, cal: 120, heat: 0, crunch: 25 },
+    { id: "onions", name: "Bourbon Onions", price: 1.00, cal: 45, heat: 0, crunch: 10 }
+  ];
+  State.lab.sauce = { id: "sample-sauce", name: "Heritage Aioli", price: 1.00, cal: 85, heat: 0 };
+
+  // Sync controls UI
+  document.querySelectorAll("#bunOptions .chip-option").forEach(b => b.classList.toggle("active", b.dataset.id === "brioche"));
+  document.querySelectorAll("#pattyOptions .chip-option").forEach(b => b.classList.toggle("active", b.dataset.id === "angus-double"));
+  document.querySelectorAll("#cheeseOptions .chip-option").forEach(b => b.classList.toggle("active", b.dataset.id === "cheddar"));
+  document.querySelectorAll("#toppingOptions .chip-toggle").forEach(b => {
+    b.classList.toggle("active", b.dataset.id === "bacon" || b.dataset.id === "onions");
+  });
+  document.querySelectorAll("#sauceOptions .chip-option").forEach(b => b.classList.toggle("active", b.dataset.id === "sample-sauce"));
+
+  updateLab();
+  showToast("↺ Reset to Classic Heritage Smash");
+}
+
 function updateLab() {
   const canvas = document.getElementById("stackCanvas");
   if (!canvas) return;
@@ -585,17 +617,12 @@ function updateLab() {
   // Calculate totals
   let totalPrice = State.lab.bun.price + State.lab.patty.price + State.lab.cheese.price + State.lab.sauce.price;
   let totalCalories = State.lab.bun.cal + State.lab.patty.cal + State.lab.cheese.cal + State.lab.sauce.cal;
-
   let totalHeat = (State.lab.sauce.heat || 0);
-  let totalCrunch = 40; // baseline
-  let totalUmami = 75;  // baseline prime patty
 
   State.lab.toppings.forEach(top => {
     totalPrice += top.price;
     totalCalories += top.cal;
     totalHeat += (top.heat || 0);
-    totalCrunch += (top.crunch || 0);
-    totalUmami += 5;
   });
 
   // Update live price display
@@ -605,40 +632,170 @@ function updateLab() {
   if (labPriceEl) labPriceEl.textContent = formattedPrice;
   if (labBtnPriceEl) labBtnPriceEl.textContent = formattedPrice;
 
-  // Render visual layers in realistic culinary stacking order:
-  // [Top Bun] -> [Sauce] -> [Toppings / Bacon / Greens] -> [Melted Cheese] -> [Hot Patty] -> [Bottom Bun]
+  // Update HUD
+  const hudCalEl = document.getElementById("hudCalories");
+  const hudHeatEl = document.getElementById("hudHeat");
+  const hudProfEl = document.getElementById("hudProfile");
+
+  if (hudCalEl) hudCalEl.textContent = `${totalCalories} kcal`;
+  if (hudHeatEl) {
+    if (totalHeat >= 60) hudHeatEl.textContent = "Fiery 🔥🔥🔥";
+    else if (totalHeat > 0) hudHeatEl.textContent = "Medium 🌶️";
+    else hudHeatEl.textContent = "Mild";
+  }
+  if (hudProfEl) {
+    if (State.lab.patty.id === "wagyu-single") hudProfEl.textContent = "American Wagyu";
+    else if (State.lab.patty.id === "portobello") hudProfEl.textContent = "Wood Portobello";
+    else hudProfEl.textContent = "Heritage Angus";
+  }
+
+  // Update Group Selected Badges
+  const selBun = document.getElementById("selectedBunLabel");
+  const selPatty = document.getElementById("selectedPattyLabel");
+  const selCheese = document.getElementById("selectedCheeseLabel");
+  const selToppings = document.getElementById("selectedToppingsLabel");
+  const selSauce = document.getElementById("selectedSauceLabel");
+
+  if (selBun) selBun.textContent = State.lab.bun.name;
+  if (selPatty) selPatty.textContent = State.lab.patty.name;
+  if (selCheese) selCheese.textContent = State.lab.cheese.name;
+  if (selToppings) {
+    selToppings.textContent = State.lab.toppings.length === 0
+      ? "None"
+      : `${State.lab.toppings.length} Selected`;
+  }
+  if (selSauce) selSauce.textContent = State.lab.sauce.name;
+
+  // Update total layer count indicator
+  const totalLayers = 4 + State.lab.toppings.length;
+  const statusEl = document.getElementById("stackStatus");
+  if (statusEl) {
+    statusEl.textContent = `${totalLayers} Artisan Layers Assembled`;
+  }
+
+  // Render realistic culinary burger stack HTML
+  // Top Bun
   let layersHtml = `
-    <div class="burger-layer layer-bun-top" title="${State.lab.bun.name}">
-      <span>Top ${State.lab.bun.name.split(" ")[0]}</span>
+    <div class="burger-layer layer-bun-top layer-${State.lab.bun.id}" data-layer-title="${State.lab.bun.name} (${State.lab.bun.cal} cal)" title="${State.lab.bun.name}">
+      <div class="bun-crust"></div>
+      <div class="bun-gloss"></div>
+      ${State.lab.bun.id !== "lettuce" ? `
+        <div class="sesame-seeds">
+          <span class="seed seed-1"></span>
+          <span class="seed seed-2"></span>
+          <span class="seed seed-3"></span>
+          <span class="seed seed-4"></span>
+          <span class="seed seed-5"></span>
+          <span class="seed seed-6"></span>
+          <span class="seed seed-7"></span>
+        </div>
+      ` : ""}
     </div>
-    <div class="burger-layer layer-sauce" title="${State.lab.sauce.name}">
-      <span>${State.lab.sauce.name}</span>
+    <div class="burger-layer layer-sauce layer-${State.lab.sauce.id}" data-layer-title="${State.lab.sauce.name}" title="${State.lab.sauce.name}">
+      <div class="sauce-base"></div>
+      <div class="sauce-drips">
+        <span class="drip drip-1"></span>
+        <span class="drip drip-2"></span>
+        <span class="drip drip-3"></span>
+      </div>
     </div>
   `;
 
-  // Render toppings
+  // Toppings
   State.lab.toppings.forEach(top => {
-    let layerClass = "layer-onions";
-    if (top.id === "bacon") layerClass = "layer-bacon";
-    if (top.id === "arugula" || top.id === "pickles") layerClass = "layer-arugula";
-    if (top.id === "jalapenos") layerClass = "layer-jalapenos";
-    layersHtml += `<div class="burger-layer ${layerClass}"><span>${top.name}</span></div>`;
+    if (top.id === "bacon") {
+      layersHtml += `
+        <div class="burger-layer layer-bacon" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="bacon-strip"></div>
+          <div class="bacon-strip"></div>
+        </div>
+      `;
+    } else if (top.id === "onions") {
+      layersHtml += `
+        <div class="burger-layer layer-onions" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="onion-ring ring-1"></div>
+          <div class="onion-ring ring-2"></div>
+          <div class="onion-ring ring-3"></div>
+        </div>
+      `;
+    } else if (top.id === "arugula") {
+      layersHtml += `
+        <div class="burger-layer layer-arugula" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="leaf leaf-1"></div>
+          <div class="leaf leaf-2"></div>
+          <div class="leaf leaf-3"></div>
+        </div>
+      `;
+    } else if (top.id === "pickles") {
+      layersHtml += `
+        <div class="burger-layer layer-pickles" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="pickle-slice"></div>
+          <div class="pickle-slice"></div>
+          <div class="pickle-slice"></div>
+        </div>
+      `;
+    } else if (top.id === "jalapenos") {
+      layersHtml += `
+        <div class="burger-layer layer-jalapenos" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="pepper-slice"></div>
+          <div class="pepper-slice"></div>
+        </div>
+      `;
+    } else if (top.id === "crispy-shallots") {
+      layersHtml += `
+        <div class="burger-layer layer-shallots" data-layer-title="${top.name} (+${top.cal} cal)" title="${top.name}">
+          <div class="shallot-crisp"></div>
+        </div>
+      `;
+    }
   });
 
-  // Cheese & Patty
+  // Cheese
   layersHtml += `
-    <div class="burger-layer layer-cheese" title="${State.lab.cheese.name}">
-      <span>${State.lab.cheese.name}</span>
+    <div class="burger-layer layer-cheese layer-${State.lab.cheese.id}" data-layer-title="${State.lab.cheese.name} (+${State.lab.cheese.cal} cal)" title="${State.lab.cheese.name}">
+      <div class="cheese-body"></div>
+      <div class="cheese-droops">
+        <span class="droop droop-left"></span>
+        <span class="droop droop-mid"></span>
+        <span class="droop droop-right"></span>
+      </div>
     </div>
-    <div class="burger-layer layer-patty" title="${State.lab.patty.name}">
-      <span>${State.lab.patty.name}</span>
+  `;
+
+  // Patty
+  layersHtml += `
+    <div class="burger-layer layer-patty layer-${State.lab.patty.id}" data-layer-title="${State.lab.patty.name} (+${State.lab.patty.cal} cal)" title="${State.lab.patty.name}">
+      <div class="patty-char-edge"></div>
+      <div class="patty-sear-mark mark-1"></div>
+      <div class="patty-sear-mark mark-2"></div>
     </div>
-    <div class="burger-layer layer-bun-bottom" title="${State.lab.bun.name}">
-      <span>Bottom Bun</span>
+  `;
+
+  // Bottom Bun
+  layersHtml += `
+    <div class="burger-layer layer-bun-bottom layer-${State.lab.bun.id}" data-layer-title="Toasted Bottom Heel" title="Bottom Bun">
     </div>
   `;
 
   canvas.innerHTML = layersHtml;
+
+  // Attach hover interactions to layers
+  canvas.querySelectorAll(".burger-layer").forEach(layer => {
+    layer.addEventListener("mouseenter", () => {
+      const title = layer.dataset.layerTitle;
+      if (statusEl && title) {
+        statusEl.textContent = `★ ${title}`;
+        statusEl.style.color = "var(--accent-gold)";
+      }
+    });
+
+    layer.addEventListener("mouseleave", () => {
+      if (statusEl) {
+        statusEl.textContent = `${totalLayers} Artisan Layers Assembled`;
+        statusEl.style.color = "var(--text-secondary)";
+      }
+    });
+  });
 }
 
 function addLabBurgerToCart() {

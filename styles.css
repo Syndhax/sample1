@@ -779,7 +779,7 @@ ul {
   opacity: 1;
 }
 
-/* --- 8. THE BURGER LAB (CLEAN & UNCLUTTERED) --- */
+/* --- 8. THE BURGER LAB (PROFESSIONAL & ARTISAN CULINARY ENGINE) --- */
 .lab-section {
   padding: 100px 0;
   position: relative;
@@ -787,8 +787,8 @@ ul {
 
 .lab-layout {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 50px;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 48px;
   align-items: center;
 }
 
@@ -799,6 +799,16 @@ ul {
 
 .lab-card-header {
   margin-bottom: 24px;
+}
+
+.lab-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .lab-title {
@@ -814,48 +824,83 @@ ul {
   line-height: 1.6;
 }
 
-/* Clean Dynamic Burger Stack Canvas */
+/* Luxury Interactive Stack Visualizer */
 .interactive-stack-container {
   position: relative;
-  height: 440px;
-  background: radial-gradient(circle at 50% 60%, rgba(30, 36, 50, 0.45) 0%, rgba(12, 14, 20, 0.9) 80%);
+  height: 480px;
+  background: radial-gradient(circle at 50% 50%, rgba(26, 31, 44, 0.6) 0%, rgba(10, 12, 18, 0.95) 75%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg), var(--surface-highlight);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 40px;
+  padding-bottom: 44px;
   overflow: hidden;
+}
+
+/* Sleek Culinary HUD */
+.lab-hud {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(18, 22, 32, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--surface-highlight);
+  z-index: 25;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.hud-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-gold);
 }
 
 .stack-canvas {
   width: 100%;
-  max-width: 320px;
+  max-width: 330px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   z-index: 10;
-  transform: translateY(10px);
+  transform: translateY(12px);
 }
 
+/* Realistic Artisan Burger Layers */
 .burger-layer {
   position: relative;
   width: 100%;
-  margin-top: -12px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.35s var(--ease-spring);
+  transition: transform 0.28s var(--ease-spring), filter 0.28s;
   animation: drop-layer 0.35s var(--ease-spring);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  user-select: none;
+  cursor: pointer;
+}
+
+.burger-layer:hover,
+.burger-layer.highlighted {
+  transform: scale(1.05) translateY(-3px);
+  filter: brightness(1.15) drop-shadow(0 6px 18px rgba(245, 158, 11, 0.35));
+  z-index: 30 !important;
 }
 
 @keyframes drop-layer {
@@ -863,83 +908,353 @@ ul {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* 1. TOP BUN */
 .layer-bun-top {
-  height: 56px;
+  height: 66px;
   width: 88%;
-  background: linear-gradient(180deg, #e38d38 0%, #c46c19 100%);
-  border-radius: 60px 60px 14px 14px;
-  margin-top: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 20;
+  border-radius: 95px 95px 18px 18px;
+  background: radial-gradient(circle at 50% 20%, #f6a147 0%, #d87216 50%, #994705 100%);
+  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.35), inset 0 3px 6px rgba(255, 255, 255, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
-.layer-bun-bottom {
-  height: 40px;
-  width: 86%;
-  background: linear-gradient(180deg, #c46c19 0%, #994e09 100%);
-  border-radius: 10px 10px 30px 30px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+.layer-bun-top.layer-pretzel {
+  background: radial-gradient(circle at 50% 20%, #7c3b16 0%, #4a1f07 60%, #290f02 100%);
+  border-radius: 90px 90px 14px 14px;
 }
 
-.layer-patty {
-  height: 44px;
-  width: 94%;
-  background: linear-gradient(180deg, #442718 0%, #29150b 100%);
-  border-radius: 16px;
+.layer-bun-top.layer-lettuce {
+  background: radial-gradient(circle at 50% 20%, #22c55e 0%, #15803d 70%, #166534 100%);
+  border-radius: 35px 35px 20px 20px;
+  box-shadow: 0 6px 18px rgba(22, 101, 52, 0.4);
 }
 
-.layer-cheese {
-  height: 20px;
-  width: 96%;
-  background: linear-gradient(180deg, #f59e0b 0%, #eab308 100%);
-  border-radius: 12px 12px 20px 20px;
+.bun-gloss {
+  position: absolute;
+  top: 6px;
+  left: 18%;
+  right: 18%;
+  height: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(1px);
 }
 
-.layer-bacon {
-  height: 18px;
-  width: 92%;
-  background: linear-gradient(90deg, #991b1b 0%, #dc2626 50%, #991b1b 100%);
-  border-radius: 8px;
+.sesame-seeds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.layer-onions {
-  height: 18px;
-  width: 86%;
-  background: linear-gradient(180deg, #78350f 0%, #451a03 100%);
-  border-radius: 6px;
+.seed {
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  background: #fef08a;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.layer-arugula {
-  height: 18px;
-  width: 90%;
-  background: linear-gradient(90deg, #15803d 0%, #16a34a 100%);
-  border-radius: 10px;
-}
+.seed-1 { top: 18px; left: 30%; transform: rotate(15deg); }
+.seed-2 { top: 14px; left: 45%; transform: rotate(-25deg); }
+.seed-3 { top: 22px; left: 60%; transform: rotate(40deg); }
+.seed-4 { top: 28px; left: 24%; transform: rotate(-10deg); }
+.seed-5 { top: 26px; left: 74%; transform: rotate(20deg); }
+.seed-6 { top: 32px; left: 40%; transform: rotate(-45deg); }
+.seed-7 { top: 34px; left: 55%; transform: rotate(10deg); }
 
-.layer-jalapenos {
-  height: 16px;
-  width: 84%;
-  background: linear-gradient(90deg, #047857 0%, #059669 100%);
-  border-radius: 8px;
-}
-
+/* 2. SAUCE LAYER */
 .layer-sauce {
   height: 14px;
   width: 90%;
-  background: radial-gradient(circle, #f97316 0%, #ea580c 100%);
+  margin-top: -6px;
+  position: relative;
+  z-index: 18;
+}
+
+.sauce-base {
+  width: 100%;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 50%, #ea580c 100%);
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.5);
+}
+
+.layer-sauce.layer-black-truffle .sauce-base {
+  background: linear-gradient(90deg, #1c1917 0%, #44403c 50%, #1c1917 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.layer-sauce.layer-ghost-fire .sauce-base {
+  background: linear-gradient(90deg, #dc2626 0%, #ef4444 50%, #b91c1c 100%);
+  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.6);
+}
+
+.sauce-drips {
+  position: absolute;
+  top: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+
+.drip {
+  width: 8px;
+  height: 9px;
+  background: inherit;
+  border-radius: 0 0 6px 6px;
+}
+
+/* 3. TOPPINGS */
+.layer-bacon {
+  height: 18px;
+  width: 93%;
+  margin-top: -6px;
+  position: relative;
+  z-index: 16;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.bacon-strip {
+  width: 48%;
+  height: 14px;
+  background: linear-gradient(90deg, #7f1d1d 0%, #b91c1c 25%, #fecaca 40%, #991b1b 70%, #450a0a 100%);
+  border-radius: 6px;
+  transform: skewX(-8deg);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+}
+
+.layer-onions {
+  height: 14px;
+  width: 88%;
+  margin-top: -5px;
+  position: relative;
+  z-index: 15;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.onion-ring {
+  height: 10px;
+  background: linear-gradient(90deg, #78350f 0%, #92400e 50%, #451a03 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.ring-1 { width: 35%; transform: rotate(-3deg); }
+.ring-2 { width: 30%; transform: rotate(4deg); }
+.ring-3 { width: 25%; transform: rotate(-2deg); }
+
+.layer-arugula {
+  height: 18px;
+  width: 91%;
+  margin-top: -6px;
+  position: relative;
+  z-index: 14;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.leaf {
+  height: 14px;
+  background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #166534 100%);
+  border-radius: 10px 14px 4px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.leaf-1 { width: 34%; transform: rotate(-4deg); }
+.leaf-2 { width: 36%; transform: rotate(3deg); }
+.leaf-3 { width: 22%; transform: rotate(-6deg); }
+
+.layer-pickles, .layer-jalapenos {
+  height: 16px;
+  width: 86%;
+  margin-top: -5px;
+  position: relative;
+  z-index: 14;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pickle-slice, .pepper-slice {
+  width: 26px;
+  height: 14px;
+  background: radial-gradient(circle, #4ade80 20%, #15803d 80%);
+  border: 2px dashed rgba(254, 240, 138, 0.4);
+  border-radius: 50%;
+  transform: rotate(-10deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.pepper-slice {
+  background: radial-gradient(circle, #34d399 20%, #065f46 80%);
+}
+
+.layer-shallots {
+  height: 14px;
+  width: 85%;
+  margin-top: -5px;
+  position: relative;
+  z-index: 14;
+}
+
+.shallot-crisp {
+  width: 100%;
+  height: 10px;
+  background: repeating-linear-gradient(45deg, #b45309, #b45309 6px, #d97706 6px, #d97706 12px);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* 4. CHEESE LAYER */
+.layer-cheese {
+  height: 22px;
+  width: 95%;
+  margin-top: -8px;
+  position: relative;
+  z-index: 13;
+}
+
+.cheese-body {
+  width: 100%;
+  height: 14px;
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
   border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.layer-cheese.layer-gouda .cheese-body {
+  background: linear-gradient(180deg, #fed7aa 0%, #f97316 100%);
+}
+
+.layer-cheese.layer-blue .cheese-body {
+  background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 30%, #3b82f6 50%, #cbd5e1 70%, #e2e8f0 100%);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.cheese-droops {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  pointer-events: none;
+}
+
+.droop {
+  position: absolute;
+  width: 18px;
+  height: 12px;
+  background: #f59e0b;
+  border-radius: 0 0 10px 10px;
+}
+
+.droop-left { left: 16%; height: 10px; }
+.droop-mid { left: 48%; height: 14px; }
+.droop-right { right: 18%; height: 11px; }
+
+/* 5. PATTY LAYER */
+.layer-patty {
+  height: 48px;
+  width: 94%;
+  margin-top: -8px;
+  position: relative;
+  z-index: 11;
+  background: radial-gradient(circle at 40% 30%, #4a2816 0%, #2d160a 60%, #150904 100%);
+  border-radius: 20px;
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.08), inset 0 -4px 8px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.layer-patty.layer-wagyu-single {
+  height: 52px;
+  background: radial-gradient(circle at 40% 30%, #5c2f18 0%, #3a190b 60%, #1c0b04 100%);
+  box-shadow: inset 0 4px 8px rgba(245, 158, 11, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.7), 0 8px 26px rgba(0, 0, 0, 0.6);
+}
+
+.layer-patty.layer-portobello {
+  height: 40px;
+  border-radius: 40px 40px 14px 14px;
+  background: radial-gradient(circle at 50% 20%, #44403c 0%, #292524 70%, #1c1917 100%);
+}
+
+.patty-char-edge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #0f0703, #0f0703 8px, #3b1d0e 8px, #3b1d0e 16px);
+  opacity: 0.8;
+}
+
+.patty-sear-mark {
+  position: absolute;
+  top: 10px;
+  width: 40px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.6);
+  transform: rotate(-15deg);
+  filter: blur(0.5px);
+}
+.mark-1 { left: 25%; }
+.mark-2 { right: 28%; }
+
+/* 6. BOTTOM BUN */
+.layer-bun-bottom {
+  height: 42px;
+  width: 86%;
+  margin-top: -6px;
+  position: relative;
+  z-index: 9;
+  background: linear-gradient(180deg, #d97706 0%, #b45309 60%, #78350f 100%);
+  border-radius: 12px 12px 30px 30px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2), 0 10px 24px rgba(0, 0, 0, 0.5);
+}
+
+.layer-bun-bottom.layer-pretzel {
+  background: linear-gradient(180deg, #602d10 0%, #3f1906 100%);
+}
+
+.layer-bun-bottom.layer-lettuce {
+  background: linear-gradient(180deg, #16a34a 0%, #15803d 100%);
+  border-radius: 14px 14px 24px 24px;
 }
 
 .stack-pedestal {
   position: absolute;
-  bottom: 15px;
-  width: 240px;
-  height: 16px;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  bottom: 18px;
+  width: 250px;
+  height: 18px;
+  background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.2) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
   border-radius: 50%;
   filter: blur(4px);
 }
 
-/* Clean Controls Panel */
+.stack-footer-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+  z-index: 15;
+}
+
+.stack-layer-indicator {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* Clean Luxury Controls Panel */
 .lab-controls-panel {
   background: var(--bg-card);
   padding: 34px;
@@ -976,12 +1291,23 @@ ul {
   margin-bottom: 20px;
 }
 
+.group-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
 .group-label {
-  display: block;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 8px;
+}
+
+.group-selected-badge {
+  font-size: 0.78rem;
+  color: var(--accent-gold);
+  font-weight: 600;
 }
 
 .option-grid {
@@ -992,7 +1318,7 @@ ul {
 
 .chip-option {
   background: rgba(255, 255, 255, 0.03);
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: var(--radius-sm);
   text-align: left;
   transition: all var(--duration-fast);
@@ -1004,18 +1330,32 @@ ul {
 }
 
 .chip-option.active {
-  background: rgba(245, 158, 11, 0.15);
-  box-shadow: 0 0 0 1px var(--accent-gold);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(234, 88, 12, 0.1) 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .chip-name {
+  display: block;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
 .chip-option.active .chip-name {
-  color: var(--accent-gold);
+  color: #ffffff;
+}
+
+.chip-meta {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.chip-option.active .chip-meta,
+.chip-toggle.active .chip-meta {
+  color: rgba(245, 158, 11, 0.9);
 }
 
 .toggle-grid {
@@ -1026,29 +1366,54 @@ ul {
 
 .chip-toggle {
   background: rgba(255, 255, 255, 0.03);
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: var(--radius-sm);
   text-align: left;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-secondary);
   box-shadow: var(--surface-highlight);
   transition: all var(--duration-fast);
 }
 
 .chip-toggle:hover {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary);
 }
 
 .chip-toggle.active {
-  background: rgba(245, 158, 11, 0.14);
-  color: var(--text-primary);
-  box-shadow: 0 0 0 1px var(--accent-gold);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(234, 88, 12, 0.1) 100%);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.chip-toggle-title {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.chip-toggle.active .chip-toggle-title {
+  color: #ffffff;
 }
 
 .lab-actions {
   margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-lab-reset {
+  width: 100%;
+  padding: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  transition: color 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-lab-reset:hover {
+  color: var(--text-secondary);
 }
 
 .w-full {
@@ -1994,18 +2359,33 @@ textarea.input-field {
   }
 
   .interactive-stack-container {
-    height: 310px;
-    padding-bottom: 24px;
+    height: 380px;
+    padding-bottom: 28px;
+  }
+
+  .lab-hud {
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    padding: 6px 12px;
+  }
+
+  .hud-label {
+    font-size: 0.58rem;
+  }
+
+  .hud-val {
+    font-size: 0.76rem;
   }
 
   .stack-canvas {
-    max-width: 250px;
+    max-width: 260px;
     transform: translateY(12px) scale(0.85);
     transform-origin: bottom center;
   }
 
   .stack-pedestal {
-    width: 190px;
+    width: 200px;
     height: 12px;
     bottom: 8px;
   }
