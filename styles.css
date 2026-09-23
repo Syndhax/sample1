@@ -420,6 +420,18 @@ ul {
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
 }
 
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 18px;
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 6.5vw, 5.2rem);
@@ -429,18 +441,46 @@ ul {
   margin-bottom: 24px;
 }
 
+.hero-title-main {
+  display: block;
+  color: #ffffff;
+}
+
+.hero-title-accent {
+  display: block;
+  background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .gradient-text {
   background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.hero-description {
-  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-  color: rgba(248, 250, 252, 0.92);
+.hero-text-block {
   max-width: 580px;
-  line-height: 1.7;
   margin-bottom: 38px;
+}
+
+.hero-description {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color: rgba(248, 250, 252, 0.92);
+  line-height: 1.7;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+
+.hero-tagline {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .hero-cta-group {
@@ -456,35 +496,6 @@ ul {
 
 .btn:hover .arrow-icon {
   transform: translateX(4px);
-}
-
-.hero-indicators {
-  position: absolute;
-  bottom: 36px;
-  left: 32px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 5;
-}
-
-.indicator-bar {
-  width: 32px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-full);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.indicator-bar:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.indicator-bar.active {
-  width: 52px;
-  background: var(--accent-gold);
-  box-shadow: 0 0 12px var(--accent-gold);
 }
 
 /* --- 6. SECTION CONTAINERS & HEADINGS --- */
@@ -1856,16 +1867,31 @@ textarea.input-field {
     min-height: 100dvh;
   }
 
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 12px;
+  }
+
   .hero-title {
     font-size: clamp(2.35rem, 9vw, 3.2rem);
-    line-height: 1.1;
+    line-height: 1.08;
     margin-bottom: 16px;
   }
 
+  .hero-text-block {
+    margin-bottom: 26px;
+  }
+
   .hero-description {
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     line-height: 1.6;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
+  }
+
+  .hero-tagline {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
   }
 
   .hero-cta-group {
@@ -1877,11 +1903,6 @@ textarea.input-field {
   .hero-cta-group .btn {
     width: 100%;
     padding: 14px 20px;
-  }
-
-  .hero-indicators {
-    bottom: 22px;
-    left: 20px;
   }
 
   /* Menu Section Mobile */

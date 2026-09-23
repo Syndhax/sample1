@@ -239,7 +239,6 @@ function initMobileMenu() {
 // ==========================================
 function initHeroSlider() {
   const slides = document.querySelectorAll(".hero-slide");
-  const indicators = document.querySelectorAll(".indicator-bar");
   if (slides.length === 0) return;
 
   let currentSlide = 0;
@@ -247,13 +246,8 @@ function initHeroSlider() {
 
   function showSlide(index) {
     slides.forEach(slide => slide.classList.remove("active"));
-    indicators.forEach(ind => ind.classList.remove("active"));
-
     currentSlide = (index + slides.length) % slides.length;
     slides[currentSlide].classList.add("active");
-    if (indicators[currentSlide]) {
-      indicators[currentSlide].classList.add("active");
-    }
   }
 
   function nextSlide() {
@@ -268,15 +262,6 @@ function initHeroSlider() {
   function stopAutoplay() {
     if (slideInterval) clearInterval(slideInterval);
   }
-
-  // Indicator click events
-  indicators.forEach(indicator => {
-    indicator.addEventListener("click", () => {
-      const idx = parseInt(indicator.dataset.index, 10);
-      showSlide(idx);
-      startAutoplay();
-    });
-  });
 
   // Touch swipe support for mobile
   const heroSection = document.getElementById("heroSection");
