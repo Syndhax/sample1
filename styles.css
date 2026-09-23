@@ -766,20 +766,8 @@ ul {
   position: relative;
 }
 
-.lab-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: 48px;
-  align-items: center;
-}
-
-.lab-visualizer-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.lab-card-header {
-  margin-bottom: 24px;
+.lab-section-header {
+  margin-bottom: 48px;
 }
 
 .lab-eyebrow {
@@ -794,45 +782,60 @@ ul {
 
 .lab-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
   font-weight: 800;
   margin-bottom: 8px;
 }
 
 .lab-desc {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
-/* Luxury Interactive Stack Visualizer */
-.interactive-stack-container {
-  position: relative;
-  height: 480px;
-  background: radial-gradient(circle at 50% 50%, rgba(26, 31, 44, 0.6) 0%, rgba(10, 12, 18, 0.95) 75%);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg), var(--surface-highlight);
+.lab-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 52px;
+  align-items: center;
+}
+
+.lab-visualizer-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 44px;
-  overflow: hidden;
+  width: 100%;
 }
 
-/* Sleek Culinary HUD */
+/* Borderless Transparent Stack Visualizer (No heavy card background) */
+.interactive-stack-container {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Sleek Minimalist Culinary HUD */
 .lab-hud {
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  right: 20px;
+  position: static;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 480px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(18, 22, 32, 0.75);
+  background: rgba(255, 255, 255, 0.035);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 10px 18px;
+  padding: 12px 24px;
   border-radius: var(--radius-full);
   box-shadow: var(--surface-highlight);
   z-index: 25;
@@ -852,20 +855,21 @@ ul {
 }
 
 .hud-val {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--accent-gold);
 }
 
+/* Massive High-Definition Burger Stack Canvas */
 .stack-canvas {
   width: 100%;
-  max-width: 330px;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   z-index: 10;
-  transform: translateY(12px);
+  margin-bottom: 6px;
 }
 
 /* Realistic Artisan Burger Layers */
@@ -891,36 +895,36 @@ ul {
 
 /* 1. TOP BUN */
 .layer-bun-top {
-  height: 66px;
+  height: 104px;
   width: 88%;
   position: relative;
   z-index: 20;
-  border-radius: 95px 95px 18px 18px;
+  border-radius: 140px 140px 24px 24px;
   background: radial-gradient(circle at 50% 20%, #f6a147 0%, #d87216 50%, #994705 100%);
-  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.35), inset 0 3px 6px rgba(255, 255, 255, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.35), inset 0 4px 8px rgba(255, 255, 255, 0.3), 0 12px 32px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
 .layer-bun-top.layer-pretzel {
   background: radial-gradient(circle at 50% 20%, #7c3b16 0%, #4a1f07 60%, #290f02 100%);
-  border-radius: 90px 90px 14px 14px;
+  border-radius: 130px 130px 20px 20px;
 }
 
 .layer-bun-top.layer-lettuce {
   background: radial-gradient(circle at 50% 20%, #22c55e 0%, #15803d 70%, #166534 100%);
-  border-radius: 35px 35px 20px 20px;
-  box-shadow: 0 6px 18px rgba(22, 101, 52, 0.4);
+  border-radius: 50px 50px 28px 28px;
+  box-shadow: 0 8px 24px rgba(22, 101, 52, 0.4);
 }
 
 .bun-gloss {
   position: absolute;
-  top: 6px;
+  top: 10px;
   left: 18%;
   right: 18%;
-  height: 14px;
+  height: 22px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
   border-radius: 50%;
-  filter: blur(1px);
+  filter: blur(1.5px);
 }
 
 .sesame-seeds {
@@ -931,146 +935,146 @@ ul {
 
 .seed {
   position: absolute;
-  width: 6px;
-  height: 3px;
+  width: 9px;
+  height: 5px;
   background: #fef08a;
   border-radius: 50%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.seed-1 { top: 18px; left: 30%; transform: rotate(15deg); }
-.seed-2 { top: 14px; left: 45%; transform: rotate(-25deg); }
-.seed-3 { top: 22px; left: 60%; transform: rotate(40deg); }
-.seed-4 { top: 28px; left: 24%; transform: rotate(-10deg); }
-.seed-5 { top: 26px; left: 74%; transform: rotate(20deg); }
-.seed-6 { top: 32px; left: 40%; transform: rotate(-45deg); }
-.seed-7 { top: 34px; left: 55%; transform: rotate(10deg); }
+.seed-1 { top: 28px; left: 30%; transform: rotate(15deg); }
+.seed-2 { top: 22px; left: 45%; transform: rotate(-25deg); }
+.seed-3 { top: 34px; left: 60%; transform: rotate(40deg); }
+.seed-4 { top: 46px; left: 24%; transform: rotate(-10deg); }
+.seed-5 { top: 42px; left: 74%; transform: rotate(20deg); }
+.seed-6 { top: 52px; left: 40%; transform: rotate(-45deg); }
+.seed-7 { top: 56px; left: 55%; transform: rotate(10deg); }
 
 /* 2. SAUCE LAYER */
 .layer-sauce {
-  height: 14px;
+  height: 22px;
   width: 90%;
-  margin-top: -6px;
+  margin-top: -10px;
   position: relative;
   z-index: 18;
 }
 
 .sauce-base {
   width: 100%;
-  height: 10px;
+  height: 16px;
   border-radius: var(--radius-full);
   background: linear-gradient(90deg, #ea580c 0%, #f97316 50%, #ea580c 100%);
-  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.5);
+  box-shadow: 0 3px 10px rgba(234, 88, 12, 0.5);
 }
 
 .layer-sauce.layer-black-truffle .sauce-base {
   background: linear-gradient(90deg, #1c1917 0%, #44403c 50%, #1c1917 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
 }
 
 .layer-sauce.layer-ghost-fire .sauce-base {
   background: linear-gradient(90deg, #dc2626 0%, #ef4444 50%, #b91c1c 100%);
-  box-shadow: 0 2px 10px rgba(220, 38, 38, 0.6);
+  box-shadow: 0 3px 12px rgba(220, 38, 38, 0.6);
 }
 
 .sauce-drips {
   position: absolute;
-  top: 6px;
+  top: 8px;
   width: 100%;
   display: flex;
   justify-content: space-around;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .drip {
-  width: 8px;
-  height: 9px;
+  width: 12px;
+  height: 14px;
   background: inherit;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 8px 8px;
 }
 
 /* 3. TOPPINGS */
 .layer-bacon {
-  height: 18px;
+  height: 28px;
   width: 93%;
-  margin-top: -6px;
+  margin-top: -10px;
   position: relative;
   z-index: 16;
   display: flex;
-  gap: 8px;
+  gap: 12px;
   justify-content: center;
 }
 
 .bacon-strip {
   width: 48%;
-  height: 14px;
+  height: 22px;
   background: linear-gradient(90deg, #7f1d1d 0%, #b91c1c 25%, #fecaca 40%, #991b1b 70%, #450a0a 100%);
-  border-radius: 6px;
+  border-radius: 8px;
   transform: skewX(-8deg);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
 }
 
 .layer-onions {
-  height: 14px;
+  height: 22px;
   width: 88%;
-  margin-top: -5px;
+  margin-top: -8px;
   position: relative;
   z-index: 15;
   display: flex;
-  gap: 6px;
+  gap: 10px;
   justify-content: center;
 }
 
 .onion-ring {
-  height: 10px;
+  height: 16px;
   background: linear-gradient(90deg, #78350f 0%, #92400e 50%, #451a03 100%);
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 .ring-1 { width: 35%; transform: rotate(-3deg); }
 .ring-2 { width: 30%; transform: rotate(4deg); }
 .ring-3 { width: 25%; transform: rotate(-2deg); }
 
 .layer-arugula {
-  height: 18px;
+  height: 26px;
   width: 91%;
-  margin-top: -6px;
+  margin-top: -10px;
   position: relative;
   z-index: 14;
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
 }
 
 .leaf {
-  height: 14px;
+  height: 20px;
   background: linear-gradient(90deg, #15803d 0%, #22c55e 50%, #166534 100%);
-  border-radius: 10px 14px 4px 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  border-radius: 14px 20px 6px 16px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
 }
 .leaf-1 { width: 34%; transform: rotate(-4deg); }
 .leaf-2 { width: 36%; transform: rotate(3deg); }
 .leaf-3 { width: 22%; transform: rotate(-6deg); }
 
 .layer-pickles, .layer-jalapenos {
-  height: 16px;
+  height: 24px;
   width: 86%;
-  margin-top: -5px;
+  margin-top: -8px;
   position: relative;
   z-index: 14;
   display: flex;
-  gap: 12px;
+  gap: 18px;
   justify-content: center;
 }
 
 .pickle-slice, .pepper-slice {
-  width: 26px;
-  height: 14px;
+  width: 38px;
+  height: 20px;
   background: radial-gradient(circle, #4ade80 20%, #15803d 80%);
   border: 2px dashed rgba(254, 240, 138, 0.4);
   border-radius: 50%;
   transform: rotate(-10deg);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
 }
 
 .pepper-slice {
@@ -1078,36 +1082,36 @@ ul {
 }
 
 .layer-shallots {
-  height: 14px;
+  height: 20px;
   width: 85%;
-  margin-top: -5px;
+  margin-top: -8px;
   position: relative;
   z-index: 14;
 }
 
 .shallot-crisp {
   width: 100%;
-  height: 10px;
+  height: 15px;
   background: repeating-linear-gradient(45deg, #b45309, #b45309 6px, #d97706 6px, #d97706 12px);
   border-radius: var(--radius-full);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
 }
 
 /* 4. CHEESE LAYER */
 .layer-cheese {
-  height: 22px;
+  height: 34px;
   width: 95%;
-  margin-top: -8px;
+  margin-top: -12px;
   position: relative;
   z-index: 13;
 }
 
 .cheese-body {
   width: 100%;
-  height: 14px;
+  height: 20px;
   background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 5px 16px rgba(245, 158, 11, 0.4);
 }
 
 .layer-cheese.layer-gouda .cheese-body {
@@ -1116,52 +1120,52 @@ ul {
 
 .layer-cheese.layer-blue .cheese-body {
   background: linear-gradient(90deg, #e2e8f0 0%, #cbd5e1 30%, #3b82f6 50%, #cbd5e1 70%, #e2e8f0 100%);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 5px 16px rgba(59, 130, 246, 0.3);
 }
 
 .cheese-droops {
   position: absolute;
-  top: 10px;
+  top: 14px;
   left: 0;
   right: 0;
-  height: 12px;
+  height: 20px;
   pointer-events: none;
 }
 
 .droop {
   position: absolute;
-  width: 18px;
-  height: 12px;
+  width: 26px;
+  height: 20px;
   background: #f59e0b;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 14px 14px;
 }
 
-.droop-left { left: 16%; height: 10px; }
-.droop-mid { left: 48%; height: 14px; }
-.droop-right { right: 18%; height: 11px; }
+.droop-left { left: 16%; height: 16px; }
+.droop-mid { left: 48%; height: 22px; }
+.droop-right { right: 18%; height: 18px; }
 
 /* 5. PATTY LAYER */
 .layer-patty {
-  height: 48px;
+  height: 72px;
   width: 94%;
-  margin-top: -8px;
+  margin-top: -12px;
   position: relative;
   z-index: 11;
   background: radial-gradient(circle at 40% 30%, #4a2816 0%, #2d160a 60%, #150904 100%);
-  border-radius: 20px;
-  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.08), inset 0 -4px 8px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.55);
+  border-radius: 28px;
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.08), inset 0 -6px 12px rgba(0, 0, 0, 0.65), 0 12px 32px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
 
 .layer-patty.layer-wagyu-single {
-  height: 52px;
+  height: 78px;
   background: radial-gradient(circle at 40% 30%, #5c2f18 0%, #3a190b 60%, #1c0b04 100%);
-  box-shadow: inset 0 4px 8px rgba(245, 158, 11, 0.2), inset 0 -5px 10px rgba(0, 0, 0, 0.7), 0 8px 26px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 5px 10px rgba(245, 158, 11, 0.2), inset 0 -7px 14px rgba(0, 0, 0, 0.7), 0 12px 34px rgba(0, 0, 0, 0.6);
 }
 
 .layer-patty.layer-portobello {
-  height: 40px;
-  border-radius: 40px 40px 14px 14px;
+  height: 58px;
+  border-radius: 54px 54px 20px 20px;
   background: radial-gradient(circle at 50% 20%, #44403c 0%, #292524 70%, #1c1917 100%);
 }
 
@@ -1170,16 +1174,16 @@ ul {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 8px;
-  background: repeating-linear-gradient(90deg, #0f0703, #0f0703 8px, #3b1d0e 8px, #3b1d0e 16px);
+  height: 12px;
+  background: repeating-linear-gradient(90deg, #0f0703, #0f0703 10px, #3b1d0e 10px, #3b1d0e 20px);
   opacity: 0.8;
 }
 
 .patty-sear-mark {
   position: absolute;
-  top: 10px;
-  width: 40px;
-  height: 2px;
+  top: 16px;
+  width: 60px;
+  height: 3px;
   background: rgba(0, 0, 0, 0.6);
   transform: rotate(-15deg);
   filter: blur(0.5px);
@@ -1189,14 +1193,14 @@ ul {
 
 /* 6. BOTTOM BUN */
 .layer-bun-bottom {
-  height: 42px;
+  height: 62px;
   width: 86%;
-  margin-top: -6px;
+  margin-top: -10px;
   position: relative;
   z-index: 9;
   background: linear-gradient(180deg, #d97706 0%, #b45309 60%, #78350f 100%);
-  border-radius: 12px 12px 30px 30px;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2), 0 10px 24px rgba(0, 0, 0, 0.5);
+  border-radius: 16px 16px 44px 44px;
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.2), 0 12px 32px rgba(0, 0, 0, 0.5);
 }
 
 .layer-bun-bottom.layer-pretzel {
@@ -1205,78 +1209,78 @@ ul {
 
 .layer-bun-bottom.layer-lettuce {
   background: linear-gradient(180deg, #16a34a 0%, #15803d 100%);
-  border-radius: 14px 14px 24px 24px;
+  border-radius: 18px 18px 32px 32px;
 }
 
 .stack-pedestal {
-  position: absolute;
-  bottom: 18px;
-  width: 250px;
-  height: 18px;
-  background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.2) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+  position: static;
+  width: 360px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.28) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 70%);
   border-radius: 50%;
   filter: blur(4px);
+  margin-top: 6px;
 }
 
 .stack-footer-bar {
-  position: absolute;
-  bottom: 12px;
-  left: 20px;
-  right: 20px;
+  position: static;
+  margin-top: 12px;
   text-align: center;
   z-index: 15;
 }
 
 .stack-layer-indicator {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
   letter-spacing: 0.08em;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s;
 }
 
-/* Clean Luxury Controls Panel */
+/* Clean Luxury Controls Panel (Borderless & Transparent) */
 .lab-controls-panel {
-  background: var(--bg-card);
-  padding: 34px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg), var(--surface-highlight);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  width: 100%;
 }
 
 .controls-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .panel-heading {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
 .panel-sub {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
 }
 
 .lab-total-price {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: var(--accent-gold);
 }
 
 .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .group-header-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .group-label {
@@ -1298,20 +1302,23 @@ ul {
 }
 
 .chip-option {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   text-align: left;
   transition: all var(--duration-fast);
   box-shadow: var(--surface-highlight);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .chip-option:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .chip-option.active {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(234, 88, 12, 0.1) 100%);
+  border-color: rgba(245, 158, 11, 0.4);
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -1341,25 +1348,28 @@ ul {
 
 .toggle-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
 .chip-toggle {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   text-align: left;
   box-shadow: var(--surface-highlight);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all var(--duration-fast);
 }
 
 .chip-toggle:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .chip-toggle.active {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(234, 88, 12, 0.1) 100%);
+  border-color: rgba(245, 158, 11, 0.4);
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -1375,7 +1385,7 @@ ul {
 }
 
 .lab-actions {
-  margin-top: 26px;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -2304,20 +2314,24 @@ textarea.input-field {
     padding: 60px 0;
   }
 
+  .lab-section-header {
+    margin-bottom: 28px;
+  }
+
   .lab-title {
     font-size: 1.85rem;
   }
 
   .interactive-stack-container {
-    height: 380px;
-    padding-bottom: 28px;
+    height: auto;
+    padding-bottom: 0;
   }
 
   .lab-hud {
-    top: 10px;
-    left: 12px;
-    right: 12px;
-    padding: 6px 12px;
+    position: static;
+    margin-bottom: 18px;
+    padding: 8px 16px;
+    max-width: 100%;
   }
 
   .hud-label {
@@ -2325,45 +2339,72 @@ textarea.input-field {
   }
 
   .hud-val {
-    font-size: 0.76rem;
+    font-size: 0.78rem;
   }
 
   .stack-canvas {
-    max-width: 260px;
-    transform: translateY(12px) scale(0.85);
-    transform-origin: bottom center;
+    max-width: 330px;
+    transform: none;
+    margin-bottom: 4px;
+  }
+
+  .layer-bun-top {
+    height: 74px;
+  }
+
+  .layer-patty {
+    height: 52px;
+  }
+
+  .layer-bun-bottom {
+    height: 46px;
   }
 
   .stack-pedestal {
-    width: 200px;
-    height: 12px;
-    bottom: 8px;
+    width: 250px;
+    height: 14px;
+    margin-top: 4px;
   }
 
   .lab-controls-panel {
-    padding: 22px 18px;
+    padding: 0;
   }
 
   .controls-header {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   .panel-heading {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .lab-total-price {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .option-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 
   .toggle-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .chip-option,
+  .chip-toggle {
+    padding: 8px 6px;
+    min-height: 40px;
+  }
+
+  .chip-name,
+  .chip-toggle-title {
+    font-size: 0.76rem;
+  }
+
+  .chip-meta {
+    font-size: 0.62rem;
   }
 
   .chip-option,
@@ -2505,12 +2546,24 @@ textarea.input-field {
   }
 
   .interactive-stack-container {
-    height: 280px;
+    height: auto;
   }
 
   .stack-canvas {
-    max-width: 230px;
-    transform: translateY(12px) scale(0.78);
+    max-width: 290px;
+    transform: none;
+  }
+
+  .layer-bun-top {
+    height: 66px;
+  }
+
+  .layer-patty {
+    height: 48px;
+  }
+
+  .layer-bun-bottom {
+    height: 42px;
   }
 
   .btn-large {
