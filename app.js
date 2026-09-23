@@ -308,28 +308,7 @@ function initSpotlightEffect() {
 // ==========================================
 function initMenu() {
   initCarouselControls();
-  renderMenuItems(State.activeCategory);
-
-  const filterTabs = document.querySelectorAll(".cat-tab");
-  filterTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      filterTabs.forEach(t => {
-        t.classList.remove("active");
-        t.setAttribute("aria-selected", "false");
-      });
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
-
-      const cat = tab.getAttribute("data-category");
-      State.activeCategory = cat;
-      renderMenuItems(cat);
-
-      const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
-      if (track) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-      }
-    });
-  });
+  renderMenuItems("all");
 }
 
 function initCarouselControls() {

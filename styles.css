@@ -511,16 +511,20 @@ ul {
 .menu-header-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 36px;
-  flex-wrap: wrap;
-  gap: 20px;
+  justify-content: flex-start;
+  margin-bottom: 32px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 20px;
 }
 
-.menu-header-titles {
-  max-width: 480px;
+.menu-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  white-space: nowrap;
 }
 
 /* Minimalist Clean Text Tabs */
@@ -2249,30 +2253,14 @@ textarea.input-field {
     font-size: 0.92rem;
   }
 
-  .category-tabs {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 8px;
-    gap: 18px;
+  .menu-header-bar {
+    margin-bottom: 24px;
+    padding-bottom: 14px;
   }
 
-  .category-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cat-tab {
+  .menu-section-title {
+    font-size: clamp(1.45rem, 6vw, 1.95rem);
     white-space: nowrap;
-    font-size: 0.88rem;
-  }
-
-  .cat-tab.active::after {
-    bottom: -9px;
-  }
-
-  .carousel-nav-btns {
-    display: none;
   }
 
   .carousel-track {
