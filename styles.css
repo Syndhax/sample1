@@ -410,23 +410,32 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   min-height: 100vh;
   min-height: 100dvh;
 }
 
 .hero-content {
-  max-width: 680px;
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 6.5vw, 5.2rem);
+  font-size: clamp(3.2rem, 7.5vw, 5.8rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
+  text-align: center;
+  color: #ffffff;
+  opacity: 0.3; /* Opacity 30% as requested */
 }
 
 .hero-title-main {
@@ -436,9 +445,7 @@ ul {
 
 .hero-title-accent {
   display: block;
-  background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 85%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff;
 }
 
 .gradient-text {
@@ -449,18 +456,28 @@ ul {
 
 .hero-description {
   font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-  color: rgba(248, 250, 252, 0.92);
-  line-height: 1.7;
-  max-width: 580px;
-  margin-bottom: 38px;
-  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto 38px;
+  font-weight: 700; /* Bold as requested */
+  text-align: center;
+  background: rgba(0, 0, 0, 0.82); /* Black background around text so that it is bold */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 18px 30px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .hero-cta-group {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 .arrow-icon {
@@ -2207,27 +2224,38 @@ textarea.input-field {
 
   .hero-content-overlay {
     padding: 120px 20px 70px;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     min-height: 100vh;
     min-height: 100dvh;
   }
 
+  .hero-content {
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
   .hero-title {
-    font-size: clamp(2.35rem, 9vw, 3.2rem);
+    font-size: clamp(2.35rem, 9.5vw, 3.4rem);
     line-height: 1.08;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .hero-description {
-    font-size: 0.96rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 26px;
+    margin: 0 auto 28px;
+    padding: 14px 18px;
+    text-align: center;
   }
 
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
     gap: 12px;
   }
 
