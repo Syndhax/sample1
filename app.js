@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCart();
   initMobileMenu();
   initImageFallbacks();
+  initReviewsCarousel();
 
   // Set minimum date for reservation picker to today
   const resDateInput = document.getElementById("resDate");
@@ -464,53 +465,136 @@ function renderMenuItems(category) {
 // ==========================================
 // 7. THE BURGER LAB (INTERACTIVE BUILDER)
 // ==========================================
+let currentLabStep = 0;
 let labAdvanceTimer = null;
 
-function scheduleAccordionAdvance(targetGroup, delay = 260) {
+function goToLabStep(stepIndex) {
+  const totalSteps = 5;
+  currentLabStep = Math.max(0, Math.min(totalSteps - 1, stepIndex));
+
+  // Update Track
+  const track = document.getElementById("labCarouselTrack");
+  if (track) {
+    track.style.transform = `translateX(-${currentLabStep * 100}%)`;
+  }
+
+  // Update Slides
+  const slides = document.querySelectorAll(".lab-step-slide");
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle("active", idx === currentLabStep);
+  });
+
+  // Update Step Nav Tabs
+  const tabs = document.querySelectorAll(".lab-step-tab");
+  tabs.forEach((tab, idx) => {
+    tab.classList.toggle("active", idx === currentLabStep);
+    if (idx === currentLabStep) {
+      tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  });
+
+  // Update Dots
+  const dots = document.querySelectorAll(".lab-dot");
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === currentLabStep);
+  });
+
+  // Update Nav Buttons
+  const prevBtn = document.getElementById("labPrevBtn");
+  const nextBtn = document.getElementById("labNextBtn");
+
+  if (prevBtn) {
+    prevBtn.disabled = (currentLabStep === 0);
+  }
+
+  if (nextBtn) {
+    if (currentLabStep === totalSteps - 1) {
+      nextBtn.innerHTML = `<span>Done</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>`;
+    } else {
+      nextBtn.innerHTML = `<span>Next</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>`;
+    }
+  }
+}
+
+function scheduleLabAdvance(nextStepIndex, delay = 280) {
   if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
   labAdvanceTimer = setTimeout(() => {
-    openAccordionGroup(targetGroup);
+    goToLabStep(nextStepIndex);
   }, delay);
 }
 
-function openAccordionGroup(groupName) {
-  const groups = document.querySelectorAll(".lab-accordion-group");
-  groups.forEach(g => {
-    const isTarget = g.dataset.group === groupName;
-    const btn = g.querySelector(".group-accordion-btn");
-    g.classList.toggle("active", isTarget);
-    if (btn) btn.setAttribute("aria-expanded", isTarget ? "true" : "false");
-  });
-}
-
-function initLabAccordion() {
-  const groups = document.querySelectorAll(".lab-accordion-group");
-  groups.forEach(group => {
-    const btn = group.querySelector(".group-accordion-btn");
-    if (!btn) return;
-    btn.addEventListener("click", () => {
+function initLabCarousel() {
+  // Step Tabs click
+  document.querySelectorAll(".lab-step-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
       if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
-      const isAlreadyActive = group.classList.contains("active");
-
-      // Close all groups
-      groups.forEach(g => {
-        g.classList.remove("active");
-        const b = g.querySelector(".group-accordion-btn");
-        if (b) b.setAttribute("aria-expanded", "false");
-      });
-
-      // If clicked one wasn't active, activate it
-      if (!isAlreadyActive) {
-        group.classList.add("active");
-        btn.setAttribute("aria-expanded", "true");
-      }
+      const step = parseInt(tab.dataset.step, 10);
+      goToLabStep(step);
     });
   });
+
+  // Step Dots click
+  document.querySelectorAll(".lab-dot").forEach(dot => {
+    dot.addEventListener("click", () => {
+      if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+      const step = parseInt(dot.dataset.step, 10);
+      goToLabStep(step);
+    });
+  });
+
+  // Prev / Next button handlers
+  const prevBtn = document.getElementById("labPrevBtn");
+  const nextBtn = document.getElementById("labNextBtn");
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+      goToLabStep(currentLabStep - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+      if (currentLabStep < 4) {
+        goToLabStep(currentLabStep + 1);
+      } else {
+        const addBtn = document.getElementById("addLabBurgerBtn");
+        if (addBtn) addBtn.focus();
+      }
+    });
+  }
+
+  // Touch swipe support for mobile
+  const viewport = document.getElementById("labCarouselViewport");
+  if (viewport) {
+    let startX = 0;
+    let endX = 0;
+
+    viewport.addEventListener("touchstart", (e) => {
+      startX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].screenX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 40) {
+        if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+        if (diff > 0) {
+          goToLabStep(currentLabStep + 1);
+        } else {
+          goToLabStep(currentLabStep - 1);
+        }
+      }
+    }, { passive: true });
+  }
+
+  goToLabStep(0);
 }
 
 function initBurgerLab() {
-  // Initialize collapsible accordion sections
-  initLabAccordion();
+  // Initialize step carousel
+  initLabCarousel();
 
   // Bun buttons
   document.querySelectorAll("#bunOptions .chip-option").forEach(btn => {
@@ -524,7 +608,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleAccordionAdvance("patty");
+      scheduleLabAdvance(1);
     });
   });
 
@@ -540,7 +624,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleAccordionAdvance("cheese");
+      scheduleLabAdvance(2);
     });
   });
 
@@ -556,7 +640,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleAccordionAdvance("toppings");
+      scheduleLabAdvance(3);
     });
   });
 
@@ -618,7 +702,7 @@ function initBurgerLab() {
 
 function resetBurgerLab() {
   if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
-  openAccordionGroup("bun");
+  goToLabStep(0);
 
   State.lab.bun = { id: "brioche", name: "Golden Brioche", price: 0, cal: 210 };
   State.lab.patty = { id: "angus-double", name: "Double Angus Smash", price: 9.00, cal: 440 };
@@ -1123,6 +1207,105 @@ function initLocationSwitch() {
       }
     });
   });
+}
+
+// ==========================================
+// 10. TESTIMONIALS & CRITICS CAROUSEL
+// ==========================================
+function initReviewsCarousel() {
+  const track = document.getElementById("criticsTrack");
+  const viewport = document.getElementById("criticsViewport");
+  const prevBtn = document.getElementById("criticsPrevBtn");
+  const nextBtn = document.getElementById("criticsNextBtn");
+  const dots = document.querySelectorAll(".critics-dot");
+  const cards = document.querySelectorAll("#criticsTrack .review-card");
+
+  if (!track || cards.length === 0) return;
+
+  let currentReview = 0;
+  let autoplayTimer = null;
+
+  function showReview(index) {
+    currentReview = (index + cards.length) % cards.length;
+    track.style.transform = `translateX(-${currentReview * 100}%)`;
+
+    cards.forEach((card, idx) => {
+      card.classList.toggle("active", idx === currentReview);
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentReview);
+    });
+  }
+
+  function nextReview() {
+    showReview(currentReview + 1);
+  }
+
+  function prevReview() {
+    showReview(currentReview - 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextReview, 5500);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevReview();
+      startAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextReview();
+      startAutoplay();
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener("click", () => {
+      const idx = parseInt(dot.dataset.index, 10);
+      showReview(idx);
+      startAutoplay();
+    });
+  });
+
+  // Touch swipe support for mobile
+  if (viewport) {
+    let startX = 0;
+    let endX = 0;
+
+    viewport.addEventListener("touchstart", (e) => {
+      startX = e.changedTouches[0].screenX;
+      stopAutoplay();
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].screenX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          nextReview();
+        } else {
+          prevReview();
+        }
+      }
+      startAutoplay();
+    }, { passive: true });
+
+    viewport.addEventListener("mouseenter", stopAutoplay);
+    viewport.addEventListener("mouseleave", startAutoplay);
+  }
+
+  showReview(0);
+  startAutoplay();
 }
 
 // ==========================================
