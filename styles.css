@@ -479,7 +479,11 @@ ul {
 }
 
 .section-header {
-  margin-bottom: 50px;
+  margin-bottom: 48px;
+}
+
+.section-header :last-child {
+  margin-bottom: 0;
 }
 
 .text-center {
