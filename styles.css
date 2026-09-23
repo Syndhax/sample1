@@ -1251,22 +1251,146 @@ ul {
   color: var(--accent-gold);
 }
 
-/* --- Luxury Interactive Step Carousel for Burger Lab --- */
+/* --- Burger Lab Controls: Desktop Accordion Drawers / Mobile Step Carousel --- */
 .lab-step-nav {
+  display: none !important;
+}
+
+.lab-carousel-footer {
+  display: none !important;
+}
+
+.lab-carousel-viewport {
+  overflow: visible;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.lab-carousel-track {
+  display: block;
+  width: 100%;
+  transform: none !important;
+}
+
+/* --- Luxury Interactive Collapsible Accordions for Burger Lab (Desktop) --- */
+.lab-accordion-group {
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--duration-fast) var(--ease-spring);
+}
+
+.lab-accordion-group:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.lab-accordion-group.active {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(245, 158, 11, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.group-accordion-btn {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  padding: 2px 2px 6px;
+  justify-content: space-between;
+  padding: 13px 16px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  border: none;
+  outline: none;
+  transition: background var(--duration-fast);
 }
 
-.lab-step-nav::-webkit-scrollbar {
-  display: none;
+.group-accordion-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
 }
 
+.group-accordion-btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: -2px;
+}
+
+.group-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.12);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.06em;
+}
+
+.group-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.group-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.group-selected-badge {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accordion-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  transition: transform 0.28s var(--ease-spring), color 0.2s;
+  flex-shrink: 0;
+}
+
+.lab-accordion-group.active .accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--accent-gold);
+}
+
+.group-content-wrapper {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.24s ease, padding 0.32s ease;
+}
+
+.lab-accordion-group.active .group-content-wrapper {
+  max-height: 580px;
+  opacity: 1;
+  padding: 2px 16px 16px;
+}
+
+/* Base styles for Mobile Carousel components (activated in @media max-width: 768px) */
 .lab-step-tab {
   flex: 1 1 0;
   display: flex;
@@ -1309,80 +1433,6 @@ ul {
 .step-tab-title {
   font-size: 0.8rem;
   font-weight: 600;
-}
-
-.lab-carousel-viewport {
-  overflow: hidden;
-  width: 100%;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.lab-carousel-track {
-  display: flex;
-  width: 100%;
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
-}
-
-.lab-step-slide {
-  flex: 0 0 100%;
-  min-width: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 16px;
-}
-
-.slide-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.slide-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.slide-step-badge {
-  font-family: var(--font-display);
-  font-size: 0.68rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-  background: rgba(245, 158, 11, 0.12);
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.05em;
-}
-
-.slide-title {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.group-selected-badge {
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: var(--accent-gold);
-  background: rgba(245, 158, 11, 0.08);
-  padding: 3px 9px;
-  border-radius: var(--radius-full);
-  max-width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lab-carousel-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  padding: 4px 6px;
 }
 
 .carousel-step-nav-btn {
@@ -2622,9 +2672,18 @@ textarea.input-field {
   }
 
   .lab-step-nav {
+    display: flex !important;
+    align-items: center;
     gap: 6px;
-    margin-bottom: 10px;
-    padding-bottom: 4px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 2px 6px;
+  }
+
+  .lab-step-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .lab-step-tab {
@@ -2641,27 +2700,70 @@ textarea.input-field {
     font-size: 0.75rem;
   }
 
-  .lab-step-slide {
-    padding: 12px 10px;
+  .lab-carousel-viewport {
+    overflow: hidden !important;
+    width: 100% !important;
+    border-radius: var(--radius-md) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
   }
 
-  .slide-header {
-    margin-bottom: 10px;
+  .lab-carousel-track {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: transform;
   }
 
-  .slide-title {
-    font-size: 0.86rem;
+  .lab-accordion-group.lab-step-slide {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 12px 10px !important;
+    box-sizing: border-box;
   }
 
-  .slide-step-badge {
-    font-size: 0.62rem;
-    padding: 2px 6px;
+  .group-accordion-btn {
+    padding: 4px 2px 10px !important;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .accordion-chevron {
+    display: none !important;
+  }
+
+  .group-content-wrapper {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    transition: none !important;
+  }
+
+  .lab-accordion-group.active .group-content-wrapper {
+    max-height: none !important;
+    opacity: 1 !important;
+    padding: 0 !important;
   }
 
   .group-selected-badge {
     font-size: 0.7rem;
     max-width: 120px;
     padding: 2px 8px;
+  }
+
+  .lab-carousel-footer {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 4px 6px;
   }
 
   .controls-header {

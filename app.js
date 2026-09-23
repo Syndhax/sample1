@@ -464,42 +464,91 @@ function renderMenuItems(category) {
 
 // ==========================================
 // 7. THE BURGER LAB (INTERACTIVE BUILDER)
+// Desktop: Collapsible Accordion Drawers
+// Mobile: Horizontal Step Carousel
 // ==========================================
 let currentLabStep = 0;
 let labAdvanceTimer = null;
+
+function openLabAccordion(groupName) {
+  const groups = document.querySelectorAll(".lab-accordion-group");
+  groups.forEach((g, idx) => {
+    const isTarget = g.dataset.group === groupName;
+    const btn = g.querySelector(".group-accordion-btn");
+    g.classList.toggle("active", isTarget);
+    if (btn) btn.setAttribute("aria-expanded", isTarget ? "true" : "false");
+    if (isTarget) currentLabStep = idx;
+  });
+}
+
+function initLabAccordion() {
+  const groups = document.querySelectorAll(".lab-accordion-group");
+  groups.forEach((group, index) => {
+    const btn = group.querySelector(".group-accordion-btn");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      // Accordion click toggle is for desktop screens (> 768px)
+      if (window.innerWidth <= 768) return;
+
+      if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+      const isAlreadyActive = group.classList.contains("active");
+
+      // Close all groups
+      groups.forEach(g => {
+        g.classList.remove("active");
+        const b = g.querySelector(".group-accordion-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+
+      // If clicked one wasn't active, activate it
+      if (!isAlreadyActive) {
+        group.classList.add("active");
+        btn.setAttribute("aria-expanded", "true");
+        currentLabStep = index;
+      }
+    });
+  });
+}
 
 function goToLabStep(stepIndex) {
   const totalSteps = 5;
   currentLabStep = Math.max(0, Math.min(totalSteps - 1, stepIndex));
 
-  // Update Track
+  // Update Track (Mobile only uses horizontal translate)
   const track = document.getElementById("labCarouselTrack");
   if (track) {
-    track.style.transform = `translateX(-${currentLabStep * 100}%)`;
+    if (window.innerWidth <= 768) {
+      track.style.transform = `translateX(-${currentLabStep * 100}%)`;
+    } else {
+      track.style.transform = "";
+    }
   }
 
-  // Update Slides
-  const slides = document.querySelectorAll(".lab-step-slide");
+  // Update Slides / Accordion Groups
+  const slides = document.querySelectorAll(".lab-accordion-group");
   slides.forEach((slide, idx) => {
-    slide.classList.toggle("active", idx === currentLabStep);
+    const isActive = (idx === currentLabStep);
+    slide.classList.toggle("active", isActive);
+    const btn = slide.querySelector(".group-accordion-btn");
+    if (btn) btn.setAttribute("aria-expanded", isActive ? "true" : "false");
   });
 
-  // Update Step Nav Tabs
+  // Update Step Nav Tabs (Mobile)
   const tabs = document.querySelectorAll(".lab-step-tab");
   tabs.forEach((tab, idx) => {
     tab.classList.toggle("active", idx === currentLabStep);
-    if (idx === currentLabStep) {
+    if (idx === currentLabStep && window.innerWidth <= 768) {
       tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
     }
   });
 
-  // Update Dots
+  // Update Dots (Mobile)
   const dots = document.querySelectorAll(".lab-dot");
   dots.forEach((dot, idx) => {
     dot.classList.toggle("active", idx === currentLabStep);
   });
 
-  // Update Nav Buttons
+  // Update Nav Buttons (Mobile)
   const prevBtn = document.getElementById("labPrevBtn");
   const nextBtn = document.getElementById("labNextBtn");
 
@@ -516,15 +565,19 @@ function goToLabStep(stepIndex) {
   }
 }
 
-function scheduleLabAdvance(nextStepIndex, delay = 280) {
+function scheduleLabAdvance(nextStepIndex, nextGroupName, delay = 280) {
   if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
   labAdvanceTimer = setTimeout(() => {
-    goToLabStep(nextStepIndex);
+    if (window.innerWidth <= 768) {
+      goToLabStep(nextStepIndex);
+    } else {
+      openLabAccordion(nextGroupName);
+    }
   }, delay);
 }
 
 function initLabCarousel() {
-  // Step Tabs click
+  // Step Tabs click (Mobile)
   document.querySelectorAll(".lab-step-tab").forEach(tab => {
     tab.addEventListener("click", () => {
       if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
@@ -533,7 +586,7 @@ function initLabCarousel() {
     });
   });
 
-  // Step Dots click
+  // Step Dots click (Mobile)
   document.querySelectorAll(".lab-dot").forEach(dot => {
     dot.addEventListener("click", () => {
       if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
@@ -542,7 +595,7 @@ function initLabCarousel() {
     });
   });
 
-  // Prev / Next button handlers
+  // Prev / Next button handlers (Mobile)
   const prevBtn = document.getElementById("labPrevBtn");
   const nextBtn = document.getElementById("labNextBtn");
 
@@ -572,10 +625,12 @@ function initLabCarousel() {
     let endX = 0;
 
     viewport.addEventListener("touchstart", (e) => {
+      if (window.innerWidth > 768) return;
       startX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     viewport.addEventListener("touchend", (e) => {
+      if (window.innerWidth > 768) return;
       endX = e.changedTouches[0].screenX;
       const diff = startX - endX;
       if (Math.abs(diff) > 40) {
@@ -589,12 +644,31 @@ function initLabCarousel() {
     }, { passive: true });
   }
 
-  goToLabStep(0);
+  // Handle browser window resize cleanly
+  window.addEventListener("resize", () => {
+    const track = document.getElementById("labCarouselTrack");
+    if (!track) return;
+    if (window.innerWidth > 768) {
+      track.style.transform = "";
+    } else {
+      track.style.transform = `translateX(-${currentLabStep * 100}%)`;
+    }
+  });
 }
 
 function initBurgerLab() {
-  // Initialize step carousel
+  // Initialize desktop accordion toggling
+  initLabAccordion();
+
+  // Initialize mobile step carousel controls
   initLabCarousel();
+
+  // Initial group state: open bun accordion on desktop, or step 0 on mobile
+  if (window.innerWidth > 768) {
+    openLabAccordion("bun");
+  } else {
+    goToLabStep(0);
+  }
 
   // Bun buttons
   document.querySelectorAll("#bunOptions .chip-option").forEach(btn => {
@@ -608,7 +682,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleLabAdvance(1);
+      scheduleLabAdvance(1, "patty");
     });
   });
 
@@ -624,7 +698,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleLabAdvance(2);
+      scheduleLabAdvance(2, "cheese");
     });
   });
 
@@ -640,7 +714,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
-      scheduleLabAdvance(3);
+      scheduleLabAdvance(3, "toppings");
     });
   });
 
@@ -702,7 +776,11 @@ function initBurgerLab() {
 
 function resetBurgerLab() {
   if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
-  goToLabStep(0);
+  if (window.innerWidth <= 768) {
+    goToLabStep(0);
+  } else {
+    openLabAccordion("bun");
+  }
 
   State.lab.bun = { id: "brioche", name: "Golden Brioche", price: 0, cal: 210 };
   State.lab.patty = { id: "angus-double", name: "Double Angus Smash", price: 9.00, cal: 440 };

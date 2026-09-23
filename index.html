@@ -174,7 +174,7 @@
                 </div>
               </div>
 
-              <!-- Step Progress Tabs (Quick Direct Step Selection) -->
+              <!-- Mobile Step Navigation Tabs (Hidden on Desktop) -->
               <nav class="lab-step-nav" aria-label="Burger Customization Steps">
                 <button type="button" class="lab-step-tab active" data-step="0" aria-label="Step 1: Bun">
                   <span class="step-tab-num">01</span>
@@ -198,149 +198,174 @@
                 </button>
               </nav>
 
-              <!-- Step Carousel Viewport -->
+              <!-- Customizer Container (Accordion on Desktop, Step Carousel on Mobile) -->
               <div class="lab-carousel-viewport" id="labCarouselViewport">
                 <div class="lab-carousel-track" id="labCarouselTrack">
-                  <!-- Slide 1: Bun -->
-                  <div class="lab-step-slide active" data-step="0">
-                    <div class="slide-header">
-                      <div class="slide-title-wrap">
-                        <span class="slide-step-badge">Step 1 / 5</span>
-                        <h4 class="slide-title">Artisanal Bun</h4>
+                  <!-- 1. Artisanal Bun -->
+                  <div class="control-group lab-accordion-group lab-step-slide active" data-group="bun" data-step="0">
+                    <button type="button" class="group-accordion-btn" aria-expanded="true">
+                      <div class="group-header-info">
+                        <span class="step-num">01</span>
+                        <span class="group-label">Artisanal Bun</span>
                       </div>
-                      <span class="group-selected-badge" id="selectedBunLabel">Golden Brioche</span>
-                    </div>
-                    <div class="option-grid" id="bunOptions">
-                      <button class="chip-option active" data-type="bun" data-id="brioche" data-price="0" data-cal="210">
-                        <span class="chip-name">Golden Brioche</span>
-                        <span class="chip-meta">Included &bull; 210 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="bun" data-id="pretzel" data-price="1.50" data-cal="260">
-                        <span class="chip-name">Pretzel Bun</span>
-                        <span class="chip-meta">+$1.50 &bull; 260 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="bun" data-id="lettuce" data-price="0" data-cal="30">
-                        <span class="chip-name">Lettuce Wrap</span>
-                        <span class="chip-meta">Included &bull; 30 cal</span>
-                      </button>
+                      <div class="group-header-meta">
+                        <span class="group-selected-badge" id="selectedBunLabel">Golden Brioche</span>
+                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                    </button>
+                    <div class="group-content-wrapper">
+                      <div class="option-grid" id="bunOptions">
+                        <button class="chip-option active" data-type="bun" data-id="brioche" data-price="0" data-cal="210">
+                          <span class="chip-name">Golden Brioche</span>
+                          <span class="chip-meta">Included &bull; 210 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="bun" data-id="pretzel" data-price="1.50" data-cal="260">
+                          <span class="chip-name">Pretzel Bun</span>
+                          <span class="chip-meta">+$1.50 &bull; 260 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="bun" data-id="lettuce" data-price="0" data-cal="30">
+                          <span class="chip-name">Lettuce Wrap</span>
+                          <span class="chip-meta">Included &bull; 30 cal</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Slide 2: Patty -->
-                  <div class="lab-step-slide" data-step="1">
-                    <div class="slide-header">
-                      <div class="slide-title-wrap">
-                        <span class="slide-step-badge">Step 2 / 5</span>
-                        <h4 class="slide-title">Prime Patty</h4>
+                  <!-- 2. Prime Patty -->
+                  <div class="control-group lab-accordion-group lab-step-slide" data-group="patty" data-step="1">
+                    <button type="button" class="group-accordion-btn" aria-expanded="false">
+                      <div class="group-header-info">
+                        <span class="step-num">02</span>
+                        <span class="group-label">Prime Patty</span>
                       </div>
-                      <span class="group-selected-badge" id="selectedPattyLabel">Double Angus Smash</span>
-                    </div>
-                    <div class="option-grid" id="pattyOptions">
-                      <button class="chip-option active" data-type="patty" data-id="angus-double" data-price="9.00" data-cal="440">
-                        <span class="chip-name">Double Angus Smash</span>
-                        <span class="chip-meta">$9.00 &bull; 440 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="patty" data-id="wagyu-single" data-price="12.00" data-cal="510">
-                        <span class="chip-name">American Wagyu</span>
-                        <span class="chip-meta">+$3.00 &bull; 510 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="patty" data-id="portobello" data-price="8.00" data-cal="190">
-                        <span class="chip-name">Wood Portobello</span>
-                        <span class="chip-meta">$8.00 &bull; 190 cal</span>
-                      </button>
+                      <div class="group-header-meta">
+                        <span class="group-selected-badge" id="selectedPattyLabel">Double Angus Smash</span>
+                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                    </button>
+                    <div class="group-content-wrapper">
+                      <div class="option-grid" id="pattyOptions">
+                        <button class="chip-option active" data-type="patty" data-id="angus-double" data-price="9.00" data-cal="440">
+                          <span class="chip-name">Double Angus Smash</span>
+                          <span class="chip-meta">$9.00 &bull; 440 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="patty" data-id="wagyu-single" data-price="12.00" data-cal="510">
+                          <span class="chip-name">American Wagyu</span>
+                          <span class="chip-meta">+$3.00 &bull; 510 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="patty" data-id="portobello" data-price="8.00" data-cal="190">
+                          <span class="chip-name">Wood Portobello</span>
+                          <span class="chip-meta">$8.00 &bull; 190 cal</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Slide 3: Cheese -->
-                  <div class="lab-step-slide" data-step="2">
-                    <div class="slide-header">
-                      <div class="slide-title-wrap">
-                        <span class="slide-step-badge">Step 3 / 5</span>
-                        <h4 class="slide-title">Melted Cheese</h4>
+                  <!-- 3. Melted Cheese -->
+                  <div class="control-group lab-accordion-group lab-step-slide" data-group="cheese" data-step="2">
+                    <button type="button" class="group-accordion-btn" aria-expanded="false">
+                      <div class="group-header-info">
+                        <span class="step-num">03</span>
+                        <span class="group-label">Melted Cheese</span>
                       </div>
-                      <span class="group-selected-badge" id="selectedCheeseLabel">Vermont Cheddar</span>
-                    </div>
-                    <div class="option-grid" id="cheeseOptions">
-                      <button class="chip-option active" data-type="cheese" data-id="cheddar" data-price="2.00" data-cal="110">
-                        <span class="chip-name">Vermont Cheddar</span>
-                        <span class="chip-meta">+$2.00 &bull; 110 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="cheese" data-id="gouda" data-price="2.50" data-cal="130">
-                        <span class="chip-name">Smoked Gouda</span>
-                        <span class="chip-meta">+$2.50 &bull; 130 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="cheese" data-id="blue" data-price="2.50" data-cal="120">
-                        <span class="chip-name">Aged Blue</span>
-                        <span class="chip-meta">+$2.50 &bull; 120 cal</span>
-                      </button>
+                      <div class="group-header-meta">
+                        <span class="group-selected-badge" id="selectedCheeseLabel">Vermont Cheddar</span>
+                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                    </button>
+                    <div class="group-content-wrapper">
+                      <div class="option-grid" id="cheeseOptions">
+                        <button class="chip-option active" data-type="cheese" data-id="cheddar" data-price="2.00" data-cal="110">
+                          <span class="chip-name">Vermont Cheddar</span>
+                          <span class="chip-meta">+$2.00 &bull; 110 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="cheese" data-id="gouda" data-price="2.50" data-cal="130">
+                          <span class="chip-name">Smoked Gouda</span>
+                          <span class="chip-meta">+$2.50 &bull; 130 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="cheese" data-id="blue" data-price="2.50" data-cal="120">
+                          <span class="chip-name">Aged Blue</span>
+                          <span class="chip-meta">+$2.50 &bull; 120 cal</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Slide 4: Additions -->
-                  <div class="lab-step-slide" data-step="3">
-                    <div class="slide-header">
-                      <div class="slide-title-wrap">
-                        <span class="slide-step-badge">Step 4 / 5</span>
-                        <h4 class="slide-title">Additions (Multi-select)</h4>
+                  <!-- 4. Additions (Multi-select) -->
+                  <div class="control-group lab-accordion-group lab-step-slide" data-group="toppings" data-step="3">
+                    <button type="button" class="group-accordion-btn" aria-expanded="false">
+                      <div class="group-header-info">
+                        <span class="step-num">04</span>
+                        <span class="group-label">Additions (Multi-select)</span>
                       </div>
-                      <span class="group-selected-badge" id="selectedToppingsLabel">2 Selected</span>
-                    </div>
-                    <div class="toggle-grid" id="toppingOptions">
-                      <button class="chip-toggle active" data-id="bacon" data-price="2.50" data-cal="120">
-                        <span class="chip-toggle-title">Thick Maple Bacon</span>
-                        <span class="chip-meta">+$2.50 &bull; 120 cal</span>
-                      </button>
-                      <button class="chip-toggle active" data-id="onions" data-price="1.00" data-cal="45">
-                        <span class="chip-toggle-title">Bourbon Onions</span>
-                        <span class="chip-meta">+$1.00 &bull; 45 cal</span>
-                      </button>
-                      <button class="chip-toggle" data-id="crispy-shallots" data-price="1.25" data-cal="55">
-                        <span class="chip-toggle-title">Crispy Shallots</span>
-                        <span class="chip-meta">+$1.25 &bull; 55 cal</span>
-                      </button>
-                      <button class="chip-toggle" data-id="pickles" data-price="0.50" data-cal="15">
-                        <span class="chip-toggle-title">House Pickles</span>
-                        <span class="chip-meta">+$0.50 &bull; 15 cal</span>
-                      </button>
-                      <button class="chip-toggle" data-id="jalapenos" data-price="0.75" data-cal="10" data-heat="20">
-                        <span class="chip-toggle-title">Torched Jalapeños</span>
-                        <span class="chip-meta">+$0.75 &bull; 10 cal</span>
-                      </button>
-                      <button class="chip-toggle" data-id="arugula" data-price="0.50" data-cal="10">
-                        <span class="chip-toggle-title">Baby Arugula</span>
-                        <span class="chip-meta">+$0.50 &bull; 10 cal</span>
-                      </button>
+                      <div class="group-header-meta">
+                        <span class="group-selected-badge" id="selectedToppingsLabel">2 Selected</span>
+                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                    </button>
+                    <div class="group-content-wrapper">
+                      <div class="toggle-grid" id="toppingOptions">
+                        <button class="chip-toggle active" data-id="bacon" data-price="2.50" data-cal="120">
+                          <span class="chip-toggle-title">Thick Maple Bacon</span>
+                          <span class="chip-meta">+$2.50 &bull; 120 cal</span>
+                        </button>
+                        <button class="chip-toggle active" data-id="onions" data-price="1.00" data-cal="45">
+                          <span class="chip-toggle-title">Bourbon Onions</span>
+                          <span class="chip-meta">+$1.00 &bull; 45 cal</span>
+                        </button>
+                        <button class="chip-toggle" data-id="crispy-shallots" data-price="1.25" data-cal="55">
+                          <span class="chip-toggle-title">Crispy Shallots</span>
+                          <span class="chip-meta">+$1.25 &bull; 55 cal</span>
+                        </button>
+                        <button class="chip-toggle" data-id="pickles" data-price="0.50" data-cal="15">
+                          <span class="chip-toggle-title">House Pickles</span>
+                          <span class="chip-meta">+$0.50 &bull; 15 cal</span>
+                        </button>
+                        <button class="chip-toggle" data-id="jalapenos" data-price="0.75" data-cal="10" data-heat="20">
+                          <span class="chip-toggle-title">Torched Jalapeños</span>
+                          <span class="chip-meta">+$0.75 &bull; 10 cal</span>
+                        </button>
+                        <button class="chip-toggle" data-id="arugula" data-price="0.50" data-cal="10">
+                          <span class="chip-toggle-title">Baby Arugula</span>
+                          <span class="chip-meta">+$0.50 &bull; 10 cal</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- Slide 5: Sauce -->
-                  <div class="lab-step-slide" data-step="4">
-                    <div class="slide-header">
-                      <div class="slide-title-wrap">
-                        <span class="slide-step-badge">Step 5 / 5</span>
-                        <h4 class="slide-title">House Sauce</h4>
+                  <!-- 5. House Sauce -->
+                  <div class="control-group lab-accordion-group lab-step-slide" data-group="sauce" data-step="4">
+                    <button type="button" class="group-accordion-btn" aria-expanded="false">
+                      <div class="group-header-info">
+                        <span class="step-num">05</span>
+                        <span class="group-label">House Sauce</span>
                       </div>
-                      <span class="group-selected-badge" id="selectedSauceLabel">Heritage Aioli</span>
-                    </div>
-                    <div class="option-grid" id="sauceOptions">
-                      <button class="chip-option active" data-type="sauce" data-id="sample-sauce" data-price="1.00" data-cal="85">
-                        <span class="chip-name">Heritage Aioli</span>
-                        <span class="chip-meta">+$1.00 &bull; 85 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="sauce" data-id="black-truffle" data-price="2.50" data-cal="95">
-                        <span class="chip-name">Truffle Emulsion</span>
-                        <span class="chip-meta">+$2.50 &bull; 95 cal</span>
-                      </button>
-                      <button class="chip-option" data-type="sauce" data-id="ghost-fire" data-price="1.25" data-cal="60" data-heat="60">
-                        <span class="chip-name">Ghost Honey</span>
-                        <span class="chip-meta">+$1.25 &bull; 60 cal</span>
-                      </button>
+                      <div class="group-header-meta">
+                        <span class="group-selected-badge" id="selectedSauceLabel">Heritage Aioli</span>
+                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                    </button>
+                    <div class="group-content-wrapper">
+                      <div class="option-grid" id="sauceOptions">
+                        <button class="chip-option active" data-type="sauce" data-id="sample-sauce" data-price="1.00" data-cal="85">
+                          <span class="chip-name">Heritage Aioli</span>
+                          <span class="chip-meta">+$1.00 &bull; 85 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="sauce" data-id="black-truffle" data-price="2.50" data-cal="95">
+                          <span class="chip-name">Truffle Emulsion</span>
+                          <span class="chip-meta">+$2.50 &bull; 95 cal</span>
+                        </button>
+                        <button class="chip-option" data-type="sauce" data-id="ghost-fire" data-price="1.25" data-cal="60" data-heat="60">
+                          <span class="chip-name">Ghost Honey</span>
+                          <span class="chip-meta">+$1.25 &bull; 60 cal</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Carousel Nav Controls -->
+              <!-- Mobile Carousel Nav Controls (Hidden on Desktop) -->
               <div class="lab-carousel-footer">
                 <button type="button" class="carousel-step-nav-btn prev-btn" id="labPrevBtn" aria-label="Previous step">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
