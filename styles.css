@@ -417,7 +417,8 @@ ul {
 }
 
 .hero-content {
-  max-width: 780px;
+  max-width: 960px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -428,15 +429,17 @@ ul {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 7.5vw, 5.8rem);
+  font-size: clamp(2rem, 6vw, 4.8rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 32px;
   text-align: center;
   color: #ffffff;
-  white-space: nowrap; /* Single line as requested */
-  opacity: 0.07; /* Almost completely invisible as requested */
+  white-space: nowrap !important; /* Single line as requested */
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  opacity: 0.10; /* Exactly 10% opacity as requested */
   user-select: none;
 }
 
@@ -2294,11 +2297,14 @@ textarea.input-field {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 8.5vw, 3.2rem);
+    font-size: clamp(1.6rem, 7vw, 2.7rem);
     line-height: 1.08;
     margin-bottom: 28px;
     text-align: center;
-    white-space: nowrap;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    opacity: 0.10;
   }
 
   .hero-cta-group {
@@ -2636,7 +2642,11 @@ textarea.input-field {
 /* Small Smartphone Viewports (<= 480px) */
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.15rem;
+    font-size: clamp(1.35rem, 7.2vw, 1.95rem);
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    opacity: 0.10;
   }
 
   .hero-burger-img {
