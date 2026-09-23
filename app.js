@@ -163,7 +163,7 @@ const State = {
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   initHeaderScroll();
-  initHeroParallax();
+  initHeroSlider();
   initSpotlightEffect();
   initMenu();
   initBurgerLab();
@@ -235,28 +235,74 @@ function initMobileMenu() {
 }
 
 // ==========================================
-// 5. 3D HERO TILT & SPOTLIGHT EFFECTS
+// 5. CINEMATIC HERO BACKGROUND SLIDESHOW
 // ==========================================
-function initHeroParallax() {
-  const heroCard = document.getElementById("heroCard");
-  const heroVisual = document.getElementById("heroVisual");
-  if (!heroCard || !heroVisual) return;
+function initHeroSlider() {
+  const slides = document.querySelectorAll(".hero-slide");
+  const indicators = document.querySelectorAll(".indicator-bar");
+  if (slides.length === 0) return;
 
-  heroVisual.addEventListener("mousemove", (e) => {
-    const rect = heroCard.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    
-    // Subtle, high-end tilt angle (max 8 degrees)
-    const rotateX = -(y / rect.height) * 12;
-    const rotateY = (x / rect.width) * 12;
+  let currentSlide = 0;
+  let slideInterval = null;
 
-    heroCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    indicators.forEach(ind => ind.classList.remove("active"));
+
+    currentSlide = (index + slides.length) % slides.length;
+    slides[currentSlide].classList.add("active");
+    if (indicators[currentSlide]) {
+      indicators[currentSlide].classList.add("active");
+    }
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    slideInterval = setInterval(nextSlide, 4500);
+  }
+
+  function stopAutoplay() {
+    if (slideInterval) clearInterval(slideInterval);
+  }
+
+  // Indicator click events
+  indicators.forEach(indicator => {
+    indicator.addEventListener("click", () => {
+      const idx = parseInt(indicator.dataset.index, 10);
+      showSlide(idx);
+      startAutoplay();
+    });
   });
 
-  heroVisual.addEventListener("mouseleave", () => {
-    heroCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-  });
+  // Touch swipe support for mobile
+  const heroSection = document.getElementById("heroSection");
+  if (heroSection) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    heroSection.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    heroSection.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          showSlide(currentSlide + 1); // swipe left
+        } else {
+          showSlide(currentSlide - 1); // swipe right
+        }
+        startAutoplay();
+      }
+    }, { passive: true });
+  }
+
+  startAutoplay();
 }
 
 function initSpotlightEffect() {
