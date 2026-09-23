@@ -319,9 +319,10 @@ function initSpotlightEffect() {
 }
 
 // ==========================================
-// 6. MENU RENDERING & FILTERING
+// 6. MENU RENDERING & CAROUSEL ENGINE
 // ==========================================
 function initMenu() {
+  initCarouselControls();
   renderMenuItems(State.activeCategory);
 
   const filterTabs = document.querySelectorAll(".cat-tab");
@@ -337,19 +338,134 @@ function initMenu() {
       const cat = tab.getAttribute("data-category");
       State.activeCategory = cat;
       renderMenuItems(cat);
+
+      const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+      if (track) {
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      }
     });
   });
 }
 
+function initCarouselControls() {
+  const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+  const prevBtn = document.getElementById("carouselPrevBtn");
+  const nextBtn = document.getElementById("carouselNextBtn");
+  if (!track) return;
+
+  function getScrollStep() {
+    const card = track.querySelector(".burger-card");
+    if (!card) return track.clientWidth * 0.8;
+    return card.offsetWidth + 24;
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+    });
+  }
+
+  let scrollTimeout;
+  track.addEventListener("scroll", () => {
+    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+    scrollTimeout = requestAnimationFrame(() => {
+      updateActiveCarouselDot();
+      updateCarouselNavState();
+    });
+  }, { passive: true });
+}
+
+function renderCarouselDots(count) {
+  const dotsContainer = document.getElementById("carouselDots");
+  if (!dotsContainer) return;
+  dotsContainer.innerHTML = "";
+
+  if (count <= 1) {
+    dotsContainer.style.display = "none";
+    return;
+  }
+  dotsContainer.style.display = "flex";
+
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement("button");
+    dot.className = `carousel-dot ${i === 0 ? "active" : ""}`;
+    dot.setAttribute("aria-label", `Burger slide ${i + 1}`);
+    dot.dataset.index = i;
+    dot.addEventListener("click", () => {
+      const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+      if (!track) return;
+      const cards = track.querySelectorAll(".burger-card");
+      if (cards[i]) {
+        track.scrollTo({
+          left: cards[i].offsetLeft - track.offsetLeft,
+          behavior: "smooth"
+        });
+      }
+    });
+    dotsContainer.appendChild(dot);
+  }
+}
+
+function updateActiveCarouselDot() {
+  const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+  const dots = document.querySelectorAll(".carousel-dot");
+  if (!track || dots.length === 0) return;
+
+  const cards = track.querySelectorAll(".burger-card");
+  if (cards.length === 0) return;
+
+  const scrollLeft = track.scrollLeft;
+  let activeIndex = 0;
+  let minDistance = Infinity;
+
+  cards.forEach((card, idx) => {
+    const cardPos = card.offsetLeft - track.offsetLeft;
+    const distance = Math.abs(cardPos - scrollLeft);
+    if (distance < minDistance) {
+      minDistance = distance;
+      activeIndex = idx;
+    }
+  });
+
+  dots.forEach((dot, idx) => {
+    if (idx === activeIndex) {
+      dot.classList.add("active");
+    } else {
+      dot.classList.remove("active");
+    }
+  });
+}
+
+function updateCarouselNavState() {
+  const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+  const prevBtn = document.getElementById("carouselPrevBtn");
+  const nextBtn = document.getElementById("carouselNextBtn");
+  if (!track) return;
+
+  if (prevBtn) {
+    prevBtn.disabled = track.scrollLeft <= 5;
+  }
+  if (nextBtn) {
+    const maxScroll = track.scrollWidth - track.clientWidth - 5;
+    nextBtn.disabled = track.scrollLeft >= maxScroll;
+  }
+}
+
 function renderMenuItems(category) {
-  const grid = document.getElementById("menuGrid");
-  if (!grid) return;
+  const track = document.getElementById("menuCarouselTrack") || document.getElementById("menuGrid");
+  if (!track) return;
 
   const items = category === "all" 
     ? BURGER_COLLECTION 
     : BURGER_COLLECTION.filter(b => b.category === category);
 
-  grid.innerHTML = items.map(burger => {
+  track.innerHTML = items.map(burger => {
     return `
       <article class="burger-card spotlight-card" data-id="${burger.id}">
         <div class="card-media">
@@ -373,6 +489,9 @@ function renderMenuItems(category) {
       </article>
     `;
   }).join("");
+
+  renderCarouselDots(items.length);
+  updateCarouselNavState();
 
   // Re-attach spotlight tracking to freshly rendered cards
   initSpotlightEffect();

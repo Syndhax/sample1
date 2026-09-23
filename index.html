@@ -15,9 +15,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Ambient background glow elements -->
-  <div class="ambient-glow glow-top" aria-hidden="true"></div>
-  <div class="ambient-glow glow-center" aria-hidden="true"></div>
+  <!-- Ambient background glow elements (isolated to prevent mobile overflow) -->
+  <div class="ambient-glows-container" aria-hidden="true">
+    <div class="ambient-glow glow-top"></div>
+    <div class="ambient-glow glow-center"></div>
+  </div>
 
   <!-- Navigation Bar -->
   <header class="site-header" id="siteHeader">
@@ -115,16 +117,16 @@
       </div>
     </section>
 
-    <!-- SIGNATURE BURGER COLLECTION (MENU) -->
+    <!-- SIGNATURE BURGER COLLECTION (CAROUSEL) -->
     <section class="menu-section" id="menu">
       <div class="section-container">
         <div class="menu-header-bar">
-          <div>
+          <div class="menu-header-titles">
             <h2 class="section-title">The Burger Collection</h2>
             <p class="section-subtitle">Crafted with precision. Available for dine-in or express pickup.</p>
           </div>
 
-          <!-- Minimalist Category Navigation (No pills) -->
+          <!-- Minimalist Category Navigation -->
           <div class="category-tabs" role="tablist" aria-label="Burger categories">
             <button class="cat-tab active" data-category="all" role="tab" aria-selected="true">All</button>
             <button class="cat-tab" data-category="smash" role="tab" aria-selected="false">Prime Smashes</button>
@@ -132,12 +134,27 @@
             <button class="cat-tab" data-category="spicy" role="tab" aria-selected="false">Fiery</button>
             <button class="cat-tab" data-category="plant" role="tab" aria-selected="false">Plant-Based</button>
           </div>
+
+          <!-- Carousel Arrow Navigation Controls -->
+          <div class="carousel-nav-btns" aria-label="Carousel navigation">
+            <button class="carousel-nav-btn prev-btn" id="carouselPrevBtn" aria-label="Previous burgers">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-nav-btn next-btn" id="carouselNextBtn" aria-label="Next burgers">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
 
-        <!-- Burger Cards Grid -->
-        <div class="menu-grid" id="menuGrid">
-          <!-- Populated dynamically via JS without small pills or clutter badges -->
+        <!-- Burger Carousel Track -->
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="menuCarouselTrack" role="region" aria-label="Burger collection carousel">
+            <!-- Populated dynamically via JS -->
+          </div>
         </div>
+
+        <!-- Minimalist Carousel Progress Dots -->
+        <div class="carousel-dots" id="carouselDots" aria-hidden="true"></div>
       </div>
     </section>
 

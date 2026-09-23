@@ -65,14 +65,25 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
   position: relative;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   min-height: 100vh;
   line-height: 1.6;
   background: radial-gradient(circle at 50% 0%, #151822 0%, var(--bg-darkest) 75%);
+}
+
+main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 img {
@@ -98,12 +109,20 @@ ul {
   list-style: none;
 }
 
-/* --- 3. AMBIENT BACKGROUND GLOWS --- */
+/* --- 3. AMBIENT BACKGROUND GLOWS (CONTAINED) --- */
+.ambient-glows-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
   filter: blur(140px);
   opacity: 0.28;
 }
@@ -119,9 +138,9 @@ ul {
 
 .glow-center {
   top: 55%;
-  right: -100px;
-  width: 600px;
-  height: 600px;
+  right: -50px;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle, #e11d48 0%, rgba(225, 29, 72, 0) 70%);
   opacity: 0.14;
 }
@@ -507,20 +526,24 @@ ul {
 
 .menu-header-bar {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 45px;
+  margin-bottom: 36px;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 20px;
 }
 
-/* Minimalist Clean Text Tabs (No capsule pills) */
+.menu-header-titles {
+  max-width: 480px;
+}
+
+/* Minimalist Clean Text Tabs */
 .category-tabs {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
 }
 
 .cat-tab {
@@ -552,16 +575,99 @@ ul {
   border-radius: var(--radius-full);
 }
 
-/* Menu Grid */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 36px;
+/* Carousel Arrow Navigation Buttons */
+.carousel-nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Minimalist Burger Card (No pills, no clutter badges) */
-.burger-card {
+.carousel-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--surface-highlight);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--duration-fast) var(--ease-spring);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--accent-gold);
+  color: #08090d;
+  transform: scale(1.06);
+  box-shadow: var(--shadow-glow);
+}
+
+.carousel-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Carousel Wrapper & Track */
+.carousel-wrapper {
   position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 4px 24px;
+  width: 100%;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Carousel Progress Dots */
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  width: 26px;
+  border-radius: var(--radius-full);
+  background: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+/* Burger Card in Carousel */
+.burger-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 320px;
+  scroll-snap-align: start;
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -1706,6 +1812,11 @@ textarea.input-field {
   .footer-top-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .burger-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+    min-width: 280px;
+  }
 }
 
 /* Tablet & Mobile Screens (<= 768px) */
@@ -1775,14 +1886,15 @@ textarea.input-field {
 
   /* Menu Section Mobile */
   .menu-section {
-    padding: 60px 0;
+    padding: 50px 0;
   }
 
   .menu-header-bar {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 30px;
-    padding-bottom: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    gap: 14px;
   }
 
   .section-title {
@@ -1798,8 +1910,8 @@ textarea.input-field {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 10px;
-    gap: 20px;
+    padding-bottom: 8px;
+    gap: 18px;
   }
 
   .category-tabs::-webkit-scrollbar {
@@ -1812,12 +1924,24 @@ textarea.input-field {
   }
 
   .cat-tab.active::after {
-    bottom: -11px;
+    bottom: -9px;
   }
 
-  .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .carousel-nav-btns {
+    display: none;
+  }
+
+  .carousel-track {
+    gap: 16px;
+    padding: 8px 0 16px;
+  }
+
+  .burger-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    scroll-snap-align: center;
   }
 
   .burger-card .card-media {
