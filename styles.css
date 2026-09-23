@@ -762,37 +762,27 @@ ul {
 
 /* --- 8. THE BURGER LAB (PROFESSIONAL & ARTISAN CULINARY ENGINE) --- */
 .lab-section {
-  padding: 100px 0;
+  padding: 90px 0;
   position: relative;
 }
 
-.lab-section-header {
-  margin-bottom: 48px;
+.lab-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 20px;
 }
 
-.lab-eyebrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-gold);
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.lab-title {
+.lab-section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
   font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.lab-desc {
-  font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 580px;
-  margin: 0 auto;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .lab-layout {
@@ -2314,12 +2304,14 @@ textarea.input-field {
     padding: 60px 0;
   }
 
-  .lab-section-header {
-    margin-bottom: 28px;
+  .lab-header-bar {
+    margin-bottom: 24px;
+    padding-bottom: 14px;
   }
 
-  .lab-title {
-    font-size: 1.85rem;
+  .lab-section-title {
+    font-size: clamp(1.45rem, 6vw, 1.95rem);
+    white-space: nowrap;
   }
 
   .interactive-stack-container {
