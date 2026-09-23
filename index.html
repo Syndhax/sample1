@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SAMPLE - Premier American Craft Burgers. Experience dry-aged cuts, artisan brioche, and wood-fired burger perfection.">
+  <title>SAMPLE | American Craft Burgers</title>
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow glow-center" aria-hidden="true"></div>
+
+  <!-- Navigation Bar -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <a href="#" class="brand-logo" aria-label="SAMPLE Restaurant Home">
+        <span class="logo-text">SAMPLE</span>
+        <span class="logo-sub">CRAFT BURGERS &bull; USA</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#lab" class="nav-link">Burger Lab</a>
+        <a href="#craft" class="nav-link">The Craft</a>
+        <a href="#story" class="nav-link">Locations</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="openReserveBtn" aria-label="Reserve a table">
+          <span>Reserve Table</span>
+        </button>
+        
+        <button class="btn btn-primary cart-trigger-btn" id="openCartBtn" aria-label="Open your order cart">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-label">Bag</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#menu" class="mobile-link">Menu</a>
+      <a href="#lab" class="mobile-link">Burger Lab</a>
+      <a href="#craft" class="mobile-link">The Craft</a>
+      <a href="#story" class="mobile-link">Locations</a>
+      <a href="#reviews" class="mobile-link">Reviews</a>
+      <div class="mobile-actions">
+        <button class="btn btn-ghost w-full" id="mobileReserveBtn">Reserve a Table</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Burgers, <br>
+            <span class="gradient-text">Elevated to Art.</span>
+          </h1>
+
+          <p class="hero-description">
+            Hand-ground custom brisket and chuck blends, slow-fermented buttery brioche, and wood-fired crusts that melt in your mouth. Born in America, perfected for purists.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#menu" class="btn btn-primary btn-large">
+              <span>Explore Menu</span>
+              <svg class="icon arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#lab" class="btn btn-secondary btn-large">
+              <span>Open Burger Lab</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Burger Visual (Clean, borderless, no floating chips or badge boxes) -->
+        <div class="hero-visual" id="heroVisual">
+          <div class="hero-burger-card" id="heroCard">
+            <div class="burger-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" 
+                   alt="SAMPLE Double Smash Burger with melted sharp cheddar" 
+                   class="hero-burger-img"
+                   id="heroBurgerImg"
+                   loading="eager">
+              <div class="burger-glow-disc"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNATURE BURGER COLLECTION (MENU) -->
+    <section class="menu-section" id="menu">
+      <div class="section-container">
+        <div class="menu-header-bar">
+          <div>
+            <h2 class="section-title">The Burger Collection</h2>
+            <p class="section-subtitle">Crafted with precision. Available for dine-in or express pickup.</p>
+          </div>
+
+          <!-- Minimalist Category Navigation (No pills) -->
+          <div class="category-tabs" role="tablist" aria-label="Burger categories">
+            <button class="cat-tab active" data-category="all" role="tab" aria-selected="true">All</button>
+            <button class="cat-tab" data-category="smash" role="tab" aria-selected="false">Prime Smashes</button>
+            <button class="cat-tab" data-category="wagyu" role="tab" aria-selected="false">Wagyu</button>
+            <button class="cat-tab" data-category="spicy" role="tab" aria-selected="false">Fiery</button>
+            <button class="cat-tab" data-category="plant" role="tab" aria-selected="false">Plant-Based</button>
+          </div>
+        </div>
+
+        <!-- Burger Cards Grid -->
+        <div class="menu-grid" id="menuGrid">
+          <!-- Populated dynamically via JS without small pills or clutter badges -->
+        </div>
+      </div>
+    </section>
+
+    <!-- THE BURGER LAB (INTERACTIVE BUILDER - CLEAN & UNCLUTTERED) -->
+    <section class="lab-section" id="lab">
+      <div class="section-container">
+        <div class="lab-layout">
+          <!-- Interactive Visualizer -->
+          <div class="lab-visualizer-col">
+            <div class="lab-card-header">
+              <h2 class="lab-title">The Burger Lab</h2>
+              <p class="lab-desc">Engineered to order. Watch your burger build layer-by-layer as you tailor meats, cheeses, and glazes.</p>
+            </div>
+
+            <!-- Dynamic Live Burger Stack Graphic -->
+            <div class="interactive-stack-container" id="stackContainer">
+              <div class="stack-canvas" id="stackCanvas" aria-live="polite">
+                <!-- Stack layers are dynamically rendered here -->
+              </div>
+              <div class="stack-pedestal"></div>
+            </div>
+          </div>
+
+          <!-- Interactive Controls Column -->
+          <div class="lab-controls-col">
+            <div class="lab-controls-panel">
+              <div class="controls-header">
+                <div>
+                  <h3 class="panel-heading">Customize Creation</h3>
+                  <p class="panel-sub">Tap to select ingredients</p>
+                </div>
+                <div class="lab-price-box">
+                  <span class="lab-total-price" id="labPrice">$16.50</span>
+                </div>
+              </div>
+
+              <!-- Bun Selector -->
+              <div class="control-group">
+                <label class="group-label">Artisanal Bun</label>
+                <div class="option-grid" id="bunOptions">
+                  <button class="chip-option active" data-type="bun" data-id="brioche" data-price="0">
+                    <span class="chip-name">Golden Brioche</span>
+                  </button>
+                  <button class="chip-option" data-type="bun" data-id="pretzel" data-price="1.50">
+                    <span class="chip-name">Pretzel Bun (+$1.50)</span>
+                  </button>
+                  <button class="chip-option" data-type="bun" data-id="lettuce" data-price="0">
+                    <span class="chip-name">Lettuce Wrap</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Patty Selection -->
+              <div class="control-group">
+                <label class="group-label">Prime Patty</label>
+                <div class="option-grid" id="pattyOptions">
+                  <button class="chip-option active" data-type="patty" data-id="angus-double" data-price="9.00">
+                    <span class="chip-name">Double Dry-Aged Angus</span>
+                  </button>
+                  <button class="chip-option" data-type="patty" data-id="wagyu-single" data-price="12.00">
+                    <span class="chip-name">American Wagyu Cut (+$3)</span>
+                  </button>
+                  <button class="chip-option" data-type="patty" data-id="portobello" data-price="8.00">
+                    <span class="chip-name">Wood-Fired Portobello</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Melted Cheese Selection -->
+              <div class="control-group">
+                <label class="group-label">Melted Cheese</label>
+                <div class="option-grid" id="cheeseOptions">
+                  <button class="chip-option active" data-type="cheese" data-id="cheddar" data-price="2.00">
+                    <span class="chip-name">Vermont Cheddar</span>
+                  </button>
+                  <button class="chip-option" data-type="cheese" data-id="gouda" data-price="2.50">
+                    <span class="chip-name">Smoked Gouda</span>
+                  </button>
+                  <button class="chip-option" data-type="cheese" data-id="blue" data-price="2.50">
+                    <span class="chip-name">Blue Cheese</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Toppings & Additions (Multi-select) -->
+              <div class="control-group">
+                <label class="group-label">Additions</label>
+                <div class="toggle-grid" id="toppingOptions">
+                  <button class="chip-toggle active" data-id="bacon" data-price="2.50">
+                    <span>Thick-Cut Maple Bacon</span>
+                  </button>
+                  <button class="chip-toggle active" data-id="onions" data-price="1.00">
+                    <span>Bourbon Onions</span>
+                  </button>
+                  <button class="chip-toggle" data-id="crispy-shallots" data-price="1.25">
+                    <span>Crispy Shallots</span>
+                  </button>
+                  <button class="chip-toggle" data-id="pickles" data-price="0.50">
+                    <span>House Pickles</span>
+                  </button>
+                  <button class="chip-toggle" data-id="jalapenos" data-price="0.75">
+                    <span>Torched Jalapeños</span>
+                  </button>
+                  <button class="chip-toggle" data-id="arugula" data-price="0.50">
+                    <span>Baby Arugula</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Signature Sauces -->
+              <div class="control-group">
+                <label class="group-label">House Sauce</label>
+                <div class="option-grid" id="sauceOptions">
+                  <button class="chip-option active" data-type="sauce" data-id="sample-sauce" data-price="1.00">
+                    <span class="chip-name">Heritage Aioli</span>
+                  </button>
+                  <button class="chip-option" data-type="sauce" data-id="black-truffle" data-price="2.50">
+                    <span class="chip-name">Truffle Emulsion</span>
+                  </button>
+                  <button class="chip-option" data-type="sauce" data-id="ghost-fire" data-price="1.25">
+                    <span class="chip-name">Ghost Honey</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Add Custom Build to Cart -->
+              <div class="lab-actions">
+                <button class="btn btn-primary w-full btn-large" id="addLabBurgerBtn">
+                  <span>Add Custom Burger to Bag</span>
+                  <span class="btn-price-tag" id="labBtnPrice">$16.50</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE CRAFT / ARTISAN PILLARS (Clean typography, no boxed icons or pills) -->
+    <section class="craft-section" id="craft">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <h2 class="section-title">The Art of Pure Flavor</h2>
+          <p class="section-subtitle">No artificial stabilizers, no industrial filler. Every detail is tuned for the legendary first bite.</p>
+        </div>
+
+        <div class="craft-grid">
+          <div class="craft-card">
+            <h3 class="craft-heading">The Prime American Blend</h3>
+            <p class="craft-text">Short rib, brisket, and dry-aged chuck sourced exclusively from family-owned ranches in Nebraska and Texas. Ground fresh twice daily at 34°F to preserve fat crystallization.</p>
+          </div>
+
+          <div class="craft-card">
+            <h3 class="craft-heading">Seared on 700° White Oak</h3>
+            <p class="craft-text">Smashed on screaming-hot custom steel plates over natural hardwood embers. This triggers the ultimate Maillard reaction: a lace-crisp crust that seals in natural juices.</p>
+          </div>
+
+          <div class="craft-card">
+            <h3 class="craft-heading">Slow-Proofed Potato Brioche</h3>
+            <p class="craft-text">Baked fresh every morning with clarified butter and Yukon Gold potato flour for cloud-like softness that compresses gracefully without ever turning soggy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMERICAN ROOTS & LOCATIONS -->
+    <section class="story-section" id="story">
+      <div class="section-container">
+        <div class="story-grid">
+          <div class="story-card">
+            <h2 class="section-title">Born in New York.<br>Perfected in Texas.</h2>
+            <p class="story-body">
+              SAMPLE began as an underground culinary experiment in a Lower East Side alleyway. Our singular mission: strip away the frozen patties, artificial stabilizers, and unnecessary restaurant fluff.
+            </p>
+            <p class="story-body">
+              Today, our open-fire hearths in Manhattan and Austin smoke burgers daily over white oak embers with genuine American craft.
+            </p>
+
+            <div class="location-picker">
+              <button class="loc-tab active" data-loc="nyc">
+                <span class="loc-name">SoHo, New York</span>
+              </button>
+              <button class="loc-tab" data-loc="austin">
+                <span class="loc-name">Downtown Austin, TX</span>
+              </button>
+            </div>
+
+            <!-- Clean Location Details -->
+            <div class="location-details-box" id="locationDetails">
+              <div class="loc-info-row">
+                <div class="loc-info-text">
+                  <strong id="locAddress">142 Spring Street, SoHo, NY 10012</strong>
+                  <span id="locHours">Mon - Sun: 11:30 AM – 11:30 PM</span>
+                  <span id="locPhone">+1 (212) 555-0198</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-visual-wrap">
+            <div class="story-image-card">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80" 
+                   alt="SAMPLE Burger and craft fries" 
+                   class="story-img"
+                   loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS & CRITICS -->
+    <section class="reviews-section" id="reviews">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <h2 class="section-title">What The Critics Say</h2>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <p class="review-quote">“SAMPLE has cracked the code: a shatteringly crisp lace crust with an ungodly juicy center. The Black Truffle Smash is an instant American benchmark.”</p>
+            <div class="reviewer-meta">
+              <strong class="reviewer-name">The New York Times</strong>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <p class="review-quote">“No ridiculous gimmick towers or border outlines. Just surgical attention to beef aging, ember heat, and potato brioche perfection. Simply the finest in the country.”</p>
+            <div class="reviewer-meta">
+              <strong class="reviewer-name">Eater National</strong>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <p class="review-quote">“The Bourbon &amp; Bacon Jam Smash delivers waves of smoke, umami, and sweet pepper balance. An electrifying room with food that speaks for itself.”</p>
+            <div class="reviewer-meta">
+              <strong class="reviewer-name">Food &amp; Wine</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODERN MINIMALIST FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <span class="footer-logo">SAMPLE</span>
+          <p class="footer-tagline">
+            American Craft Burgers, Wood-Fired Hearth &amp; Craft Spirits. Obsessively dry-aged, passionately grilled.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Locations</h4>
+          <ul class="footer-nav">
+            <li><a href="#story">SoHo, New York</a></li>
+            <li><a href="#story">Downtown Austin, TX</a></li>
+            <li><a href="#story">West Loop, Chicago</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Experience</h4>
+          <ul class="footer-nav">
+            <li><a href="#menu">Burger Menu</a></li>
+            <li><a href="#lab">The Burger Lab</a></li>
+            <li><a href="#craft">The Craft</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Private Reserve</h4>
+          <p class="footer-text">Receive secret off-menu drops and seasonal cuts.</p>
+          <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); window.SampleApp.handleNewsletter(this);">
+            <input type="email" placeholder="Email address" required class="input-field" autocomplete="email">
+            <button type="submit" class="btn btn-primary btn-newsletter">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 SAMPLE Hospitality Group LLC. All Rights Reserved.</p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy</a>
+          <a href="#">Allergens</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NATIVE HTML5 DIALOG: QUICK VIEW MODAL -->
+  <dialog id="quickViewModal" class="native-dialog">
+    <div class="dialog-wrapper">
+      <button class="dialog-close-btn" id="closeQuickViewBtn" aria-label="Close modal">&times;</button>
+      <div class="quickview-body" id="quickViewContent">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- NATIVE HTML5 DIALOG: TABLE RESERVATION -->
+  <dialog id="reserveModal" class="native-dialog">
+    <div class="dialog-wrapper reserve-dialog-box">
+      <button class="dialog-close-btn" id="closeReserveBtn" aria-label="Close modal">&times;</button>
+      <div class="reserve-form-container">
+        <div class="modal-header">
+          <h3 class="modal-title">Table Reservation</h3>
+          <p class="modal-sub">Experience the aroma of white oak embers and live dining.</p>
+        </div>
+
+        <form id="reservationForm" class="reserve-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="resLocation">Location</label>
+              <select id="resLocation" required class="input-field">
+                <option value="nyc">SoHo Flagship (New York, NY)</option>
+                <option value="austin">Downtown Austin (Austin, TX)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="resGuests">Guests</label>
+              <select id="resGuests" required class="input-field">
+                <option value="2">2 Guests</option>
+                <option value="4" selected>4 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="8">8+ Guests</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="resDate">Date</label>
+              <input type="date" id="resDate" required class="input-field">
+            </div>
+            <div class="form-field">
+              <label for="resTime">Time Slot</label>
+              <select id="resTime" required class="input-field">
+                <option value="17:30">5:30 PM</option>
+                <option value="19:00" selected>7:00 PM</option>
+                <option value="20:30">8:30 PM</option>
+                <option value="22:00">10:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="resName">Full Name</label>
+            <input type="text" id="resName" placeholder="Full name" required class="input-field" autocomplete="name">
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="resEmail">Email</label>
+              <input type="email" id="resEmail" placeholder="you@domain.com" required class="input-field" autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="resPhone">Phone</label>
+              <input type="tel" id="resPhone" placeholder="(555) 000-0000" required class="input-field" autocomplete="tel">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full btn-large">
+            <span>Confirm Reservation</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- CART & ORDER DRAWER -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-label="Order Cart">
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+    <div class="cart-panel">
+      <div class="cart-header">
+        <div>
+          <h3 class="cart-title">Your Bag</h3>
+          <p class="cart-subtitle" id="cartItemsSubtitle">0 items</p>
+        </div>
+        <button class="cart-close-btn" id="closeCartBtn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsList">
+        <div class="empty-cart-state" id="emptyCartState">
+          <h4>Your bag is empty</h4>
+          <p>Explore our signature collection or construct a custom burger in the Burger Lab.</p>
+        </div>
+      </div>
+
+      <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-breakdown">
+          <div class="breakdown-row">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">$0.00</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Tax (8.875%)</span>
+            <span id="cartTax">$0.00</span>
+          </div>
+          <div class="breakdown-divider"></div>
+          <div class="breakdown-row total-row">
+            <span>Total</span>
+            <span id="cartTotal" class="total-amount">$0.00</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary w-full btn-large" id="checkoutBtn" onclick="window.SampleApp.handleCheckout()">
+          <span>Checkout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
