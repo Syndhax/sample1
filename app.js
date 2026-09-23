@@ -538,7 +538,10 @@ function goToLabStep(stepIndex) {
   tabs.forEach((tab, idx) => {
     tab.classList.toggle("active", idx === currentLabStep);
     if (idx === currentLabStep && window.innerWidth <= 768) {
-      tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      const nav = tab.parentElement;
+      if (nav && nav.scrollWidth > nav.clientWidth) {
+        tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
     }
   });
 

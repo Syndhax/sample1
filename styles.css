@@ -2662,80 +2662,167 @@ textarea.input-field {
   }
 
   .stack-pedestal {
-    width: 250px;
-    height: 14px;
-    margin-top: 4px;
+    width: 220px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  /* The Burger Lab Mobile Customizer */
+  .lab-section {
+    padding: 40px 0 50px;
   }
 
   .lab-controls-panel {
     padding: 0;
   }
 
-  .lab-step-nav {
-    display: flex !important;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 12px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding: 2px 2px 6px;
+  .controls-header {
+    margin-bottom: 10px;
   }
 
-  .lab-step-nav::-webkit-scrollbar {
-    display: none;
+  .panel-heading {
+    font-size: 1.15rem;
+  }
+
+  .lab-total-price {
+    font-size: 1.35rem;
+  }
+
+  /* 5-Step Tab Navigation across the top (fits all phones) */
+  .lab-step-nav {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
   }
 
   .lab-step-tab {
-    padding: 7px 8px;
-    gap: 5px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px 2px !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    border-radius: var(--radius-sm) !important;
+    box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  }
+
+  .lab-step-tab.active {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.25) !important;
   }
 
   .step-tab-num {
-    font-size: 0.62rem;
-    padding: 2px 5px;
+    font-size: 0.58rem !important;
+    padding: 1px 4px !important;
+    line-height: 1 !important;
+    background: rgba(245, 158, 11, 0.15) !important;
+    color: var(--accent-gold) !important;
+    border-radius: var(--radius-full) !important;
   }
 
   .step-tab-title {
-    font-size: 0.75rem;
+    font-size: 0.68rem !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    color: var(--text-secondary) !important;
   }
 
+  .lab-step-tab.active .step-tab-title {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  /* Carousel Viewport & Track */
   .lab-carousel-viewport {
     overflow: hidden !important;
     width: 100% !important;
     border-radius: var(--radius-md) !important;
     background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .lab-carousel-track {
     display: flex !important;
     flex-direction: row !important;
     width: 100% !important;
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1) !important;
     will-change: transform;
+    min-width: 0 !important;
   }
 
   .lab-accordion-group.lab-step-slide {
     flex: 0 0 100% !important;
     min-width: 100% !important;
+    max-width: 100% !important;
     width: 100% !important;
     margin-bottom: 0 !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 12px 10px !important;
-    box-sizing: border-box;
+    padding: 10px 8px !important;
+    box-sizing: border-box !important;
   }
 
+  /* Slide Title Line */
   .group-accordion-btn {
-    padding: 4px 2px 10px !important;
-    cursor: default;
-    pointer-events: none;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 0 8px !important;
+    cursor: default !important;
+    pointer-events: none !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .group-header-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+  }
+
+  .step-num {
+    font-size: 0.65rem !important;
+    padding: 2px 5px !important;
+  }
+
+  .group-label {
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+  }
+
+  .group-header-meta {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
   }
 
   .accordion-chevron {
     display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    visibility: hidden !important;
   }
 
   .group-content-wrapper {
@@ -2744,6 +2831,8 @@ textarea.input-field {
     overflow: visible !important;
     padding: 0 !important;
     transition: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
   }
 
   .lab-accordion-group.active .group-content-wrapper {
@@ -2753,60 +2842,99 @@ textarea.input-field {
   }
 
   .group-selected-badge {
-    font-size: 0.7rem;
-    max-width: 120px;
-    padding: 2px 8px;
+    font-size: 0.68rem !important;
+    max-width: 130px !important;
+    padding: 2px 7px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  .lab-carousel-footer {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-    padding: 4px 6px;
-  }
-
-  .controls-header {
-    margin-bottom: 14px;
-  }
-
-  .panel-heading {
-    font-size: 1.25rem;
-  }
-
-  .lab-total-price {
-    font-size: 1.5rem;
-  }
-
+  /* Option Buttons Grid: exactly 3 equal columns that fit on any phone */
   .option-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .toggle-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .chip-option,
   .chip-toggle {
-    padding: 8px 6px;
-    min-height: 40px;
+    padding: 8px 4px !important;
+    min-height: 48px !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: var(--radius-sm) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .chip-option.active,
+  .chip-toggle.active {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(234, 88, 12, 0.12) 100%) !important;
+    border-color: rgba(245, 158, 11, 0.5) !important;
   }
 
   .chip-name,
   .chip-toggle-title {
-    font-size: 0.76rem;
+    font-size: 0.72rem !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    text-align: center !important;
   }
 
   .chip-meta {
-    font-size: 0.62rem;
+    font-size: 0.58rem !important;
+    margin-top: 2px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
   }
 
-  .chip-option,
-  .chip-toggle {
-    padding: 12px 14px;
-    min-height: 44px;
+  /* Carousel Navigation Footer */
+  .lab-carousel-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-top: 8px !important;
+    padding: 2px 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .carousel-step-nav-btn {
+    padding: 6px 12px !important;
+    font-size: 0.74rem !important;
+    min-height: 32px !important;
+  }
+
+  .lab-carousel-dots {
+    gap: 5px !important;
+  }
+
+  .lab-dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .lab-dot.active {
+    width: 16px !important;
   }
 
   /* The Craft Mobile */
@@ -2974,17 +3102,17 @@ textarea.input-field {
   }
 
   .lab-step-tab {
-    padding: 6px 6px;
-    gap: 4px;
+    padding: 6px 2px;
+    gap: 2px;
   }
 
   .step-tab-num {
-    font-size: 0.6rem;
-    padding: 1px 4px;
+    font-size: 0.56rem;
+    padding: 1px 3px;
   }
 
   .step-tab-title {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
   }
 
   .hero-burger-img {
@@ -2996,8 +3124,10 @@ textarea.input-field {
   }
 
   .stack-canvas {
-    max-width: 290px;
+    max-width: 260px;
+    height: 160px;
     transform: none;
+    margin: 0 auto 6px;
   }
 
   .layer-bun-top {
