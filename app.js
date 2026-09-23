@@ -464,7 +464,54 @@ function renderMenuItems(category) {
 // ==========================================
 // 7. THE BURGER LAB (INTERACTIVE BUILDER)
 // ==========================================
+let labAdvanceTimer = null;
+
+function scheduleAccordionAdvance(targetGroup, delay = 260) {
+  if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+  labAdvanceTimer = setTimeout(() => {
+    openAccordionGroup(targetGroup);
+  }, delay);
+}
+
+function openAccordionGroup(groupName) {
+  const groups = document.querySelectorAll(".lab-accordion-group");
+  groups.forEach(g => {
+    const isTarget = g.dataset.group === groupName;
+    const btn = g.querySelector(".group-accordion-btn");
+    g.classList.toggle("active", isTarget);
+    if (btn) btn.setAttribute("aria-expanded", isTarget ? "true" : "false");
+  });
+}
+
+function initLabAccordion() {
+  const groups = document.querySelectorAll(".lab-accordion-group");
+  groups.forEach(group => {
+    const btn = group.querySelector(".group-accordion-btn");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+      const isAlreadyActive = group.classList.contains("active");
+
+      // Close all groups
+      groups.forEach(g => {
+        g.classList.remove("active");
+        const b = g.querySelector(".group-accordion-btn");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+
+      // If clicked one wasn't active, activate it
+      if (!isAlreadyActive) {
+        group.classList.add("active");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+}
+
 function initBurgerLab() {
+  // Initialize collapsible accordion sections
+  initLabAccordion();
+
   // Bun buttons
   document.querySelectorAll("#bunOptions .chip-option").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -477,6 +524,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
+      scheduleAccordionAdvance("patty");
     });
   });
 
@@ -492,6 +540,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
+      scheduleAccordionAdvance("cheese");
     });
   });
 
@@ -507,6 +556,7 @@ function initBurgerLab() {
         cal: parseInt(btn.dataset.cal, 10)
       };
       updateLab();
+      scheduleAccordionAdvance("toppings");
     });
   });
 
@@ -567,6 +617,9 @@ function initBurgerLab() {
 }
 
 function resetBurgerLab() {
+  if (labAdvanceTimer) clearTimeout(labAdvanceTimer);
+  openAccordionGroup("bun");
+
   State.lab.bun = { id: "brioche", name: "Golden Brioche", price: 0, cal: 210 };
   State.lab.patty = { id: "angus-double", name: "Double Angus Smash", price: 9.00, cal: 440 };
   State.lab.cheese = { id: "cheddar", name: "Vermont Cheddar", price: 2.00, cal: 110 };

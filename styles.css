@@ -1248,27 +1248,115 @@ ul {
   color: var(--accent-gold);
 }
 
-.control-group {
-  margin-bottom: 14px;
+/* --- Luxury Interactive Collapsible Accordions for Burger Lab --- */
+.lab-accordion-group {
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--duration-fast) var(--ease-spring);
 }
 
-.group-header-flex {
+.lab-accordion-group:hover {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.lab-accordion-group.active {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(245, 158, 11, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.group-accordion-btn {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  padding: 13px 16px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  border: none;
+  outline: none;
+  transition: background var(--duration-fast);
+}
+
+.group-accordion-btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: -2px;
+}
+
+.group-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.12);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.06em;
 }
 
 .group-label {
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
+.group-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .group-selected-badge {
-  font-size: 0.78rem;
-  color: var(--accent-gold);
+  font-size: 0.76rem;
   font-weight: 600;
+  color: var(--accent-gold);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accordion-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  transition: transform 0.28s var(--ease-spring), color 0.2s;
+  flex-shrink: 0;
+}
+
+.lab-accordion-group.active .accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--accent-gold);
+}
+
+.group-content-wrapper {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.24s ease, padding 0.32s ease;
+}
+
+.lab-accordion-group.active .group-content-wrapper {
+  max-height: 580px;
+  opacity: 1;
+  padding: 2px 16px 16px;
 }
 
 .option-grid {
@@ -2350,6 +2438,34 @@ textarea.input-field {
 
   .lab-controls-panel {
     padding: 0;
+  }
+
+  .group-accordion-btn {
+    padding: 11px 12px;
+  }
+
+  .step-num {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+  }
+
+  .group-label {
+    font-size: 0.82rem;
+  }
+
+  .group-selected-badge {
+    font-size: 0.72rem;
+    max-width: 120px;
+    padding: 3px 8px;
+  }
+
+  .group-content-wrapper {
+    padding: 0 12px;
+  }
+
+  .lab-accordion-group.active .group-content-wrapper {
+    padding: 2px 12px 14px;
+    max-height: 520px;
   }
 
   .controls-header {
